@@ -2,7 +2,6 @@
 
 namespace Tolehoai\CarForRent\Controller;
 
-use Tolehoai\CarForRent\Boostrap\Application;
 use Tolehoai\CarForRent\Boostrap\Controller;
 
 class SiteController extends Controller

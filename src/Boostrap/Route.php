@@ -7,78 +7,45 @@ class Route
     /**
      * @var Request
      */
-    public Request $request;
+    public static Request $request;
     /**
      * @param Request $request
      */
-    public Response $response;
+    public static Response $response;
     /**
      * @var array
      */
-    protected array $route = [];
+    protected static array $route = [];
 
     public function __construct(Request $request, Response $response)
     {
-        $this->request = $request;
-        $this->response = $response;
+        self::$request = $request;
+        self::$response = $response;
     }
 
-
-    public function get($path, $callback)
+    public static function get($path, $callback)
     {
-        $this->route['get'][$path] = $callback;
+        self::$route['get'][$path] = $callback;
     }
 
-    public function post($path, $callback)
+    public static function post($path, $callback)
     {
-        $this->route['post'][$path] = $callback;
+        self::$route['post'][$path] = $callback;
     }
 
-
-    public function resolve()
+    public static function resolve()
     {
-        $path = $this->request->getPath();
-        $method = $this->request->getMethod();
-        $callback = $this->route[$method][$path] ?? false;
+        $path = self::$request->getPath();
+        $method = self::$request->getMethod();
+        $callback = self::$route[$method][$path] ?? false;
         if ($callback === false) {
-            $this->response->setStatusCode(404);
-            return $this->renderView('404');
+            self::$response->setStatusCode(404);
+            return View::renderView('404');
         }
         if (is_string($callback)) {
-            return $this->renderView($callback);
+            return View::renderView($callback);
         }
-
         return call_user_func($callback);
     }
-
-    /**
-     * @param string $view
-     * @return array|false|string|string[]
-     */
-    public function renderView(string $view, $params=[])
-    {
-        $layoutContent = $this->layoutContent();
-        $viewContent = $this->renderOnlyView($view,$params);
-        return str_replace('{{content}}', $viewContent, $layoutContent);
-    }
-
-    public function layoutContent()
-    {
-        ob_start();
-        include_once Application::$ROOT_DIR . "/src/View/layouts/mainLayout.php";
-        return ob_get_clean();
-    }
-
-    public function renderOnlyView($view, $params)
-    {
-        foreach ($params as $key=>$value){
-            $$key = $value;
-        }
-
-        ob_start();
-        include_once Application::$ROOT_DIR . "/src/View/$view.php";
-        return ob_get_clean();
-    }
-
-
 }
+

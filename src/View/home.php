@@ -27,9 +27,23 @@
                         <li><a class="dropdown-item" href="#">Something else here</a></li>
                     </ul>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/login">Login</a>
-                </li>
+                <?php
+                if (!isset($_SESSION["username"])) {
+                    echo '<li class="nav-item"><a class="nav-link" href="/login">Login</a></li>';
+                }
+                ?>
+
+                <?php
+                if (isset($_SESSION["username"])) {
+                    echo ' <li class="nav-item">';
+                    echo ' <a class="nav-link">Hello ' . $_SESSION["username"] . '</a>';
+                    echo ' </li>';
+                    echo ' <li class="nav-item">  <a class="nav-link" href="/logout">Logout</a>   </li>';
+                }
+
+                ?>
+
+
             </ul>
             <form class="d-flex">
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">

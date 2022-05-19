@@ -7,7 +7,6 @@ use Tolehoai\CarForRent\Boostrap\Controller;
 
 class SiteController extends Controller
 {
-
     public function home()
     {
 

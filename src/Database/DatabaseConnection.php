@@ -15,11 +15,12 @@ class DatabaseConnection
     protected static $dotenv;
     public static function getConnection(): PDO
     {
-        $dotenv = Dotenv::createImmutable(__DIR__."/../../");
-        self::$dotenv=$dotenv->load();
+        $dotenv = Dotenv::createImmutable(__DIR__ . "/../../");
+        self::$dotenv = $dotenv->load();
 
         if (!self::$conn) {
-            $host = $_ENV['HOST'];;
+            $host = $_ENV['HOST'];
+            ;
             $username = $_ENV['USERNAME'];
             $password = $_ENV['PASSWORD'];
             $database = $_ENV['DATABASE'];
@@ -33,5 +34,19 @@ class DatabaseConnection
             }
         }
         return self::$conn;
+    }
+    public static function beginTransaction()
+    {
+        self::$conn->beginTransaction();
+    }
+
+    public static function commitTransaction()
+    {
+        self::$conn->commit();
+    }
+
+    public static function rollbackTransaction()
+    {
+        self::$conn->rollBack();
     }
 }

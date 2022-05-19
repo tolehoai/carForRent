@@ -48,4 +48,3 @@ class Route
         return call_user_func($callback);
     }
 }
-

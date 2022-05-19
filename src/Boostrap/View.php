@@ -32,4 +32,9 @@ class View
         include_once Application::$ROOT_DIR . "/src/View/$view.php";
         return ob_get_clean();
     }
+
+    public static function redirect($url)
+    {
+        header("Location: $url");
+    }
 }

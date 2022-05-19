@@ -2,6 +2,7 @@
 
 namespace Tolehoai\CarForRent\Database;
 
+use Dotenv\Dotenv;
 use PDO;
 use PDOException;
 
@@ -11,14 +12,17 @@ class DatabaseConnection
      * return PDO
      */
     private static $conn;
-
+    protected static $dotenv;
     public static function getConnection(): PDO
     {
+        $dotenv = Dotenv::createImmutable(__DIR__."/../../");
+        self::$dotenv=$dotenv->load();
+
         if (!self::$conn) {
-            $host = 'localhost';
-            $username = 'carrent';
-            $password = 'Tolehoai123!@#';
-            $database = 'rentcar';
+            $host = $_ENV['HOST'];;
+            $username = $_ENV['USERNAME'];
+            $password = $_ENV['PASSWORD'];
+            $database = $_ENV['DATABASE'];
 
             try {
                 self::$conn = new PDO("mysql:host=$host;dbname=$database", $username, $password);

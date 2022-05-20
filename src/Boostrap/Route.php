@@ -30,7 +30,7 @@ class Route
 
     public static function post($path, $callback)
     {
-        self::$route['post'][$path] = $callback;
+        static::$route['post'][$path] = $callback;
     }
 
     public static function resolve()

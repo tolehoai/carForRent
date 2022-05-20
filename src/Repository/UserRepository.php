@@ -4,18 +4,18 @@ namespace Tolehoai\CarForRent\Repository;
 
 use Tolehoai\CarForRent\Database\DatabaseConnection;
 use Tolehoai\CarForRent\Model\User;
+use Tolehoai\CarForRent\Transfer\UserTransfer;
 
 class UserRepository
 {
-    public function findByUsername($userInput)
+    public function findByUsername(UserTransfer $userInput)
     {
         $statement = DatabaseConnection::getConnection()->prepare("SELECT * FROM user WHERE user_username = ?");
-        $statement->execute([$userInput->username]);
+        $statement->execute([$userInput->getUsername()]);
 
         try {
             $user = new User();
             if ($row = $statement->fetch()) {
-//                var_dump($row);
                 $user->setId($row['user_ID']);
                 $user->setUsername($row['user_username']);
                 $user->setPassword($row['user_password']);

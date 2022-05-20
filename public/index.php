@@ -3,6 +3,7 @@
 use Tolehoai\CarForRent\Boostrap\Application;
 use Tolehoai\CarForRent\Controller\SiteController;
 use Tolehoai\CarForRent\Database\DatabaseConnection;
+
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
 

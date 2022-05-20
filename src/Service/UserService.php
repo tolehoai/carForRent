@@ -3,10 +3,12 @@
 namespace Tolehoai\CarForRent\Service;
 
 use Tolehoai\CarForRent\Boostrap\Response;
+use Tolehoai\CarForRent\Boostrap\View;
 use Tolehoai\CarForRent\Database\DatabaseConnection;
 use Tolehoai\CarForRent\Exception\ValidationException;
 use Tolehoai\CarForRent\Model\User;
 use Tolehoai\CarForRent\Repository\UserRepository;
+use Tolehoai\CarForRent\Transfer\UserTransfer;
 
 class UserService
 {
@@ -45,8 +47,31 @@ class UserService
         }
     }
 
+    public function handleLogin()
+    {
+        // validation
+        $user->setUsername($_POST['username']);
+        $user->setPassword($_POST['password']);
+        //Dung Request get data de lay data tu request
+        $this->validateUserLogin($user);
+        //Phai co validation cua user rieng
+        //call UserService
+        // check login
+        try {
+            $response = $this->userService->login($user);
+            $_SESSION["username"] = $user->getUsername();
+            View::redirect("/");
+        } catch (ValidationException $e) {
+            return View::renderView('login', [
+                'title' => 'Login',
+                'username' => $user->getUsername(),
+                'password' => $user->getPassword(),
+                'error' => $e->getMessage()
+            ]);
+        }
+    }
 
-    public function login(User $userInput)
+    public function login(UserTransfer $userInput)
     {
         $response = new Response();
         $response->setUser($userInput);

@@ -11,7 +11,7 @@ Route::get('/login', [new UserController(), 'login']);
 Route::post('/login', [new  UserController(), 'loginAction']);
 Route::get('/register', [new UserController(), 'register']);
 Route::post('/register', [new  UserController(), 'handleRegister']);
-Route::get('/logout', [new  UserController(), 'handleLogout']);
+Route::post('/logout', [new  UserController(), 'logout']);
 Route::get('/about', 'about');
 
 Route::get('/404', '404');

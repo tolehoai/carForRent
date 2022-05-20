@@ -28,25 +28,25 @@
                     </ul>
                 </li>
                 <?php
-                if (!isset($_SESSION["username"])) {
+                if (!isset($_COOKIE["X-SESSION"])) {
                     echo '<li class="nav-item"><a class="nav-link" href="/login">Login</a></li>';
                 }
                 ?>
 
-                <?php
-                if (isset($_SESSION["username"])) {
-                    echo ' <li class="nav-item">';
-                    echo ' <a class="nav-link">Hello ' . $_SESSION["username"] . '</a>';
-                    echo ' </li>';
-                    echo ' <li class="nav-item">  <a class="nav-link" href="/logout">Logout</a>   </li>';
-                }
 
-                ?>
 
             </ul>
-            <form class="d-flex">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
+            <form class="d-flex" method="post" action="logout">
+                <?php
+                if (isset($_COOKIE["X-SESSION"])) {
+                    echo '<form action="logout" method="post">';
+                    echo ' <li class="nav-item">';
+                    echo ' <a class="nav-link d-inline-block">Hello ' . $_COOKIE["X-SESSION-USERNAME"] . '</a>';
+                    echo ' </li>';
+                    echo ' <button class="btn btn-lg btn-primary h-25" type="submit">Sign out</button>';
+                    echo '</form>';
+                }
+                ?>
             </form>
         </div>
     </div>

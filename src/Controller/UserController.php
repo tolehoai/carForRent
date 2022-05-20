@@ -51,7 +51,7 @@ class UserController extends Controller
 
             $this->sessionService->create($userTransfer->getUsername());
 //            $_SESSION["username"] = $userTransfer->getUsername();
-//            View::redirect("/");
+            View::redirect("/");
         }catch (ValidationException $e) {
             return View::renderView('login', [
                 'title' => 'Login',
@@ -61,37 +61,12 @@ class UserController extends Controller
             ]);
         }
 
-//        // validation
-//        $user = new User();
-//        $user->setUsername($_POST['username']);
-//        $user->setPassword($_POST['password']);
-//        //Dung Request get data de lay data tu request
-//        var_dump($user);
-//        $this->validateUserLogin($user);
-//        //Phai co validation cua user rieng
-//        //call UserService
-//        // check login
-//        try {
-//            $response = $this->userService->login($user);
-//
-//            $_SESSION["username"] = $user->getUsername();
-//            View::redirect("/");
-//        } catch (ValidationException $e) {
-//            return View::renderView('login', [
-//                'title' => 'Login',
-//                'username' => $user->getUsername(),
-//                'password' => $user->getPassword(),
-//                'error' => $e->getMessage()
-//            ]);
-//        }
-
-
     }
 
-    public function handleLogout()
+    public function logout()
     {
-        unset($_SESSION['username']);
-        View::redirect("/");
+        $this->sessionService->destroy();
+        View::redirect('/');
     }
 
 

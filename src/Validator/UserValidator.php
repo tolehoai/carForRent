@@ -3,10 +3,11 @@
 namespace Tolehoai\CarForRent\Validator;
 
 use Tolehoai\CarForRent\Exception\ValidationException;
+use Tolehoai\CarForRent\Transfer\UserTransfer;
 
 class UserValidator
 {
-    public function validateUserLogin($user)
+    public function validateUserLogin(UserTransfer $user)
     {
         if (
             empty($user->getUsername()) ||
@@ -14,5 +15,6 @@ class UserValidator
         ) {
             throw new ValidationException("Id or password cannot be empty");
         }
+        return true;
     }
 }

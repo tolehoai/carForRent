@@ -35,20 +35,18 @@ class UserController extends Controller
         $this->response = $response;
         $this->userValidator = $userValidator;
         $this->sessionService = $sessionService;
-        $this->userTransfer=$userTransfer;
+        $this->userTransfer = $userTransfer;
     }
 
     public function loginAction()
     {
         try {
-
-            $this->userTransfer->fromArray() ;
+            $this->userTransfer->fromArray();
             $this->userValidator->validateUserLogin($this->userTransfer);
             $response = $this->userService->login($this->userTransfer);
-            var_dump($this->userTransfer);
             $this->sessionService->create($this->userTransfer->getUsername());
             View::redirect("/");
-        } catch (LoginException $e) {
+        } catch (LoginException|ValidationException $e) {
             return View::renderView('login', [
                 'title' => 'Login',
                 'username' => $this->userTransfer->getUsername(),

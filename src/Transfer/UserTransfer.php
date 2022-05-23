@@ -60,7 +60,8 @@ class UserTransfer extends Request
     public function fromArray()
     {
         $body = parent::getBody();
-        $this->username = $body['username'] ?? '';
-        $this->password = $body['password'] ?? '';
+        $this->setUsername( $body['username'] ?? '');
+        $this->setPassword($body['password'] ?? '');
+        return $this;
     }
 }

@@ -6,6 +6,7 @@ use Tolehoai\CarForRent\Boostrap\Controller;
 use Tolehoai\CarForRent\Boostrap\Request;
 use Tolehoai\CarForRent\Boostrap\Response;
 use Tolehoai\CarForRent\Boostrap\View;
+use Tolehoai\CarForRent\Exception\LoginException;
 use Tolehoai\CarForRent\Exception\ValidationException;
 use Tolehoai\CarForRent\Service\SessionService;
 use Tolehoai\CarForRent\Service\UserService;
@@ -19,11 +20,13 @@ class UserController extends Controller
     private $userValidator;
     private $request;
     private $response;
+    private $userTransfer;
 
     public function __construct(
         UserService $userService,
         Request $request,
         Response $response,
+        UserTransfer $userTransfer,
         UserValidator $userValidator,
         SessionService $sessionService
     ) {
@@ -32,27 +35,25 @@ class UserController extends Controller
         $this->response = $response;
         $this->userValidator = $userValidator;
         $this->sessionService = $sessionService;
+        $this->userTransfer=$userTransfer;
     }
 
     public function loginAction()
     {
         try {
-            $userTransfer = new UserTransfer();
-            $userTransfer->fromArray($_POST);
 
-            $this->userValidator->validateUserLogin($userTransfer);
-
-            $response = $this->userService->login($userTransfer);
-
-            $this->sessionService->create($userTransfer->getUsername());
-//            $_SESSION["username"] = $userTransfer->getUsername();
+            $this->userTransfer->fromArray() ;
+            $this->userValidator->validateUserLogin($this->userTransfer);
+            $response = $this->userService->login($this->userTransfer);
+            var_dump($this->userTransfer);
+            $this->sessionService->create($this->userTransfer->getUsername());
             View::redirect("/");
-        } catch (ValidationException $e) {
+        } catch (LoginException $e) {
             return View::renderView('login', [
                 'title' => 'Login',
-                'username' => $userTransfer->getUsername(),
-                'password' => $userTransfer->getPassword(),
-                'error' => $e->getMessage()
+                'username' => $this->userTransfer->getUsername(),
+                'password' => $this->userTransfer->getPassword(),
+                'error' => $e->getMessage(),
             ]);
         }
     }

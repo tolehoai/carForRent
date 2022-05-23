@@ -8,6 +8,7 @@ use Tolehoai\CarForRent\Model\Session;
 class SessionRepository
 {
     private $connection;
+
     public function __construct()
     {
         $this->connection = DatabaseConnection::getConnection();
@@ -28,14 +29,14 @@ class SessionRepository
         $statement = $this->connection->prepare("SELECT idsession, user_id FROM session WHERE idsession = '$id' ");
         $statement->execute();
 
-        try{
+        try {
             $session = new Session();
-            if($row = $statement->fetch()){
+            if ($row = $statement->fetch()) {
                 $session->id = $row['id'];
                 $session->userId = $row['user_id'];
             }
             return $session;
-        }finally{
+        } finally {
             $statement->closeCursor();
         }
     }

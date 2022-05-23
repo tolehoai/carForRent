@@ -2,12 +2,21 @@
 
 namespace Tolehoai\CarForRent\Repository;
 
+use PDO;
 use Tolehoai\CarForRent\Database\DatabaseConnection;
 use Tolehoai\CarForRent\Model\User;
 use Tolehoai\CarForRent\Transfer\UserTransfer;
 
 class UserRepository
 {
+    private PDO $connection;
+    private User $user;
+    public function __construct( User $user)
+    {
+        $this->connection=DatabaseConnection::getConnection();
+        $this->user = $user;
+    }
+
     public function findByUsername(UserTransfer $userInput)
     {
         $statement = DatabaseConnection::getConnection()->prepare("SELECT * FROM user WHERE user_username = ?");

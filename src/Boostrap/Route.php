@@ -35,6 +35,7 @@ class Route
 
     public static function resolve()
     {
+        $container = new Container();
         $path = self::$request->getPath();
         $method = self::$request->getMethod();
         $callback = self::$route[$method][$path] ?? false;
@@ -45,6 +46,10 @@ class Route
         if (is_string($callback)) {
             return View::renderView($callback);
         }
-        return call_user_func($callback);
+
+        $currenController = $callback[0];
+        $action = $callback[1];
+        $controller = $container->make($currenController);
+        return $controller->$action();
     }
 }

@@ -3,13 +3,10 @@
 namespace Tolehoai\CarForRent\Controller;
 
 use Tolehoai\CarForRent\Boostrap\Controller;
+use Tolehoai\CarForRent\Boostrap\Request;
+use Tolehoai\CarForRent\Boostrap\Response;
 use Tolehoai\CarForRent\Boostrap\View;
-use Tolehoai\CarForRent\Database\DatabaseConnection;
-
 use Tolehoai\CarForRent\Exception\ValidationException;
-use Tolehoai\CarForRent\Model\User;
-use Tolehoai\CarForRent\Repository\SessionRepository;
-use Tolehoai\CarForRent\Repository\UserRepository;
 use Tolehoai\CarForRent\Service\SessionService;
 use Tolehoai\CarForRent\Service\UserService;
 use Tolehoai\CarForRent\Transfer\UserTransfer;
@@ -20,23 +17,21 @@ class UserController extends Controller
     private $userService;
     private $sessionService;
     private $userValidator;
-    protected $connection;
+    private $request;
+    private $response;
 
-    public function __construct()
-    {
-        $connection = DatabaseConnection::getConnection();
-        $userRepository = new UserRepository();
-        $this->userService = new UserService($userRepository);
-        $sessionRepository = new SessionRepository($connection);
-        $this->sessionService = new SessionService($sessionRepository, $userRepository);
-        $this->userValidator = new UserValidator();
-    }
-
-
-
-    public function login()
-    {
-        return $this->render('login');
+    public function __construct(
+        UserService $userService,
+        Request $request,
+        Response $response,
+        UserValidator $userValidator,
+        SessionService $sessionService
+    ) {
+        $this->userService = $userService;
+        $this->request = $request;
+        $this->response = $response;
+        $this->userValidator = $userValidator;
+        $this->sessionService = $sessionService;
     }
 
     public function loginAction()
@@ -52,7 +47,7 @@ class UserController extends Controller
             $this->sessionService->create($userTransfer->getUsername());
 //            $_SESSION["username"] = $userTransfer->getUsername();
             View::redirect("/");
-        }catch (ValidationException $e) {
+        } catch (ValidationException $e) {
             return View::renderView('login', [
                 'title' => 'Login',
                 'username' => $userTransfer->getUsername(),
@@ -60,7 +55,11 @@ class UserController extends Controller
                 'error' => $e->getMessage()
             ]);
         }
+    }
 
+    public function login()
+    {
+        return $this->render('login');
     }
 
     public function logout()
@@ -70,11 +69,11 @@ class UserController extends Controller
     }
 
 
-
     public function register()
     {
         return $this->render('register');
     }
+
     public function handleRegister()
     {
         unset($_SESSION['username']);

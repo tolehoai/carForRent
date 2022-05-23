@@ -9,8 +9,6 @@ class SiteController extends Controller
 {
     public function home()
     {
-
-
         $param = [
             'name' => 'To Le Hoai'
         ];

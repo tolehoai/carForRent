@@ -13,7 +13,7 @@ class UserTest extends TestCase
     public function testGetId()
     {
         $user = new User();
-         $user->setId(1);
+        $user->setId(1);
         $user_id = $user->getId();
         $this->assertEquals(1, $user_id);
     }

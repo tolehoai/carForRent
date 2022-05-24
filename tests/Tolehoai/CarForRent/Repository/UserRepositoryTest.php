@@ -10,12 +10,19 @@ use Tolehoai\CarForRent\Service\DatabaseService;
 
 class UserRepositoryTest extends TestCase
 {
-    public function testFindByUsername(){
+    public function testFindByUsernameSuccess(){
         $databaseService = new DatabaseService();
         $userRepository = new UserRepository($databaseService);
         $result = $userRepository->findByUsername('tolehoai')->getUsername();
         $expected = new User();
         $expected->setUsername('tolehoai');
         $this->assertEquals($expected->getUsername(), $result);
+    }
+
+    public function testFindByUsernameFailed(){
+        $databaseService = new DatabaseService();
+        $userRepository = new UserRepository($databaseService);
+        $result = $userRepository->findByUsername('tolehoai1');
+        $this->assertEquals(null, $result);
     }
 }

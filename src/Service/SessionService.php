@@ -22,15 +22,23 @@ class SessionService
 
     public function create($userId)
     {
-
         $session = new Session();
-        $session->id = uniqid();
+        $session->id = $this->getUniqueId();
         $session->userId = $userId;
         $this->sessionRepository->save($session);
-        setcookie(self::$COOKIE_NAME, $session->id, time() + (60 * 60 * 24), '/');
-        setcookie(self::$COOKIE_USERNAME, $session->userId, time() + (60 * 60 * 24), '/');
+        $this->setCookie($session);
         return $session;
     }
+
+    private function getUniqueId(){
+        return uniqid();
+    }
+    //RandomService
+    private function setCookie(Session $session){
+        setcookie(self::$COOKIE_NAME, $session->id, time() + (60 * 60 * 24), '/');
+        setcookie(self::$COOKIE_USERNAME, $session->userId, time() + (60 * 60 * 24), '/');
+    }
+    //Move Cookie to CookieService
 
 
     public function destroy()

@@ -13,6 +13,10 @@ class DatabaseConnection
      */
     private static $conn;
     protected static $dotenv;
+
+    /**
+     * @return PDO
+     */
     public static function getConnection(): PDO
     {
         $dotenv = Dotenv::createImmutable(__DIR__ . "/../../");

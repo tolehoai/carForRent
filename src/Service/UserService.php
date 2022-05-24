@@ -20,7 +20,7 @@ class UserService
 
     public function login(UserTransfer $userInput)
     {
-        $existUser = $this->userRepository->findByUsername($userInput);
+        $existUser = $this->userRepository->findByUsername($userInput->getUsername());
         if ($existUser && password_verify($userInput->getPassword(), $existUser->getPassword())) {
             $this->sessionService->create($userInput->getUsername());
             return true;

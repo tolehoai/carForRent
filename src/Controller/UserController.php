@@ -38,21 +38,29 @@ class UserController extends Controller
 
     public function loginAction()
     {
-        $this->userTransfer->fromArray($this->request->getBody());
-        $this->userValidator->validateUserLogin($this->userTransfer);
-        $response = $this->userService->login($this->userTransfer);
-
-        if ($response['success']) {
-            $this->sessionService->create($this->userTransfer->getUsername());
-            View::redirect("/");
-        } else {
-            return View::renderView('login', [
-                'title' => 'Login',
-                'username' => $this->userTransfer->getUsername(),
-                'password' => $this->userTransfer->getPassword(),
-                'error' => $response['errorMessage'],
-            ]);
+        try {
+            $errorMessage = '';
+            if ($this->request->isPost()) {
+                $this->userTransfer->fromArray($this->request->getBody());
+                $this->userValidator->validateUserLogin($this->userTransfer);
+                $isLoginSuccess = $this->userService->login($this->userTransfer);
+                if ($isLoginSuccess) {
+                    View::redirect("/");
+                }
+                $errorMessage = 'The username or password is invalid!';
+            }
+        } catch (\Exception $exception) {
+            // logging
+            $exception->getMessage();
+            $errorMessage = 'The our system went something wrong!';
         }
+
+        return View::renderView('login', [
+            'title' => 'Login',
+            'username' => $this->userTransfer->getUsername(),
+            'password' => $this->userTransfer->getPassword(),
+            'error' => $errorMessage,
+        ]);
     }
 
 

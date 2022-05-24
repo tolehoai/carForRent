@@ -25,10 +25,14 @@ class User
 
     /**
      * @param mixed $id
+     *
+     * @return User
      */
-    public function setId($id): void
+    public function setId($id): self
     {
         $this->id = $id;
+
+        return $this;
     }
 
     /**

@@ -3,10 +3,8 @@
 namespace Test\Tolehoai\CarForRent\Service;
 
 use PHPUnit\Framework\TestCase;
-use Tolehoai\CarForRent\Exception\LoginException;
-use Tolehoai\CarForRent\Exception\ValidationException;
-use Tolehoai\CarForRent\Model\User;
 use Tolehoai\CarForRent\Repository\UserRepository;
+use Tolehoai\CarForRent\Service\SessionService;
 use Tolehoai\CarForRent\Service\UserService;
 use Tolehoai\CarForRent\Transfer\UserTransfer;
 
@@ -20,19 +18,21 @@ class UserServiceTest extends TestCase
     {
         $userRepositoryMock = $this->getMockBuilder(UserRepository::class)->disableOriginalConstructor()->getMock();
         $userRepositoryMock->expects($this->once())->method('findByUsername')->willReturn($params['user']);
-        $userService = new UserService($userRepositoryMock);
+
+        $sessionServiceMock = $this->getMockBuilder(SessionService::class)->disableOriginalConstructor()->getMock();
+        $userService = new UserService($userRepositoryMock, $sessionServiceMock);
         $userTransfer = new UserTransfer();
 
         $userTransfer->fromArray($params);
         $result = $userService->login($userTransfer);
 
-        $this->assertEquals($expected['username'], $result->getUsername());
-        $this->assertEquals($expected['password'], $result->getPassword());
+        $this->assertEquals($expected, $result);
     }
+
     /**
-     * @return array[]
+     * @return
      */
-    public function loginDataProviderSuccess(): array
+    public function loginDataProviderSuccess()
     {
         return [
             'happy-case-1' => [
@@ -41,51 +41,30 @@ class UserServiceTest extends TestCase
                     'password' => 'tolehoai',
                     'user' => $this->getUser('tolehoai', '$2a$12$.nA9eaCwOT5pxb/NNPpFuebd9uj0De/pkqMBDPITLPYVrj808FkEG')
                 ],
-                'expected' => [
-
-                    'username' => 'tolehoai',
-                    'password' => '$2a$12$.nA9eaCwOT5pxb/NNPpFuebd9uj0De/pkqMBDPITLPYVrj808FkEG'
-                ]
+                'expected' =>
+                    true
             ],
-        ];
-    }
-
-    /**
-     *  * @dataProvider loginDataProviderFailed
-     * @return void
-     */
-    public function testLoginFailed($params, $expected)
-    {
-        $userRepositoryMock = $this->getMockBuilder(UserRepository::class)->disableOriginalConstructor()->getMock();
-        $userRepositoryMock->expects($this->once())->method('findByUsername')->willReturn(null);
-
-        $userService = new UserService($userRepositoryMock);
-        $userTransfer = new UserTransfer();
-        $this->expectException(LoginException::class);
-
-        $userService->login($userTransfer);
-
-    }
-    /**
-     * @return array[]
-     */
-    public function loginDataProviderFailed(): array
-    {
-        return [
-            'happy-case-1' => [
+            'happy-case-2' => [
+                'params' => [
+                    'username' => 'tolehoai',
+                    'password' => '123',
+                    'user' => $this->getUser('tolehoai', '1$2a$12$.nA9eaCwOT5pxb/NNPpFuebd9uj0De/pkqMBDPITLPYVrj808FkEG')
+                ],
+                'expected' =>
+                    false
+            ],
+            'happy-case-3' => [
                 'params' => [
                     'username' => 'user1',
-                    'password' => 'tolehoai',
-                    'user' => $this->getUser('user1', '$2a$12$.nA9eaCwOT5pxb/NNPpFuebd9uj0De/pkqMBDPITLPYVrj808FkEG')
+                    'password' => '123',
+                    'user' => $this->getUser('tolehoai', '$2a$12$.nA9eaCwOT5pxb/NNPpFuebd9uj0De/pkqMBDPITLPYVrj808FkEG')
                 ],
-                'expected' => [
-
-                    'username' => 'tolehoai',
-                    'password' => '$2a$12$.nA9eaCwOT5pxb/NNPpFuebd9uj0De/pkqMBDPITLPYVrj808FkEG'
-                ]
+                'expected' =>
+                    false
             ],
         ];
     }
+
 
     private function getUser(string $username, string $password): UserTransfer
     {

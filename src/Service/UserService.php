@@ -8,25 +8,23 @@ use Tolehoai\CarForRent\Transfer\UserTransfer;
 
 class UserService
 {
-    private $userRepository;
+    private UserRepository $userRepository;
+    private SessionService $sessionService;
 
 
-    public function __construct(UserRepository $userRepository)
+    public function __construct(UserRepository $userRepository, SessionService $sessionService)
     {
         $this->userRepository = $userRepository;
+        $this->sessionService = $sessionService;
     }
 
     public function login(UserTransfer $userInput)
     {
         $existUser = $this->userRepository->findByUsername($userInput);
-        if ($existUser == null) {
-            return ['errorMessage'=>'User or password invaild', 'success'=>false];
-        } else {
-            if (!password_verify($userInput->getPassword(), $existUser->getPassword())) {
-                return ['errorMessage'=>'User or password invaild', 'success'=>false];
-            }
+        if ($existUser && password_verify($userInput->getPassword(), $existUser->getPassword())) {
+            $this->sessionService->create($userInput->getUsername());
+            return true;
         }
-        return ['success'=>true];
+        return false;
     }
-
 }

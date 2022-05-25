@@ -9,9 +9,8 @@ class UserValidator
 {
     public function validateUserLogin(UserTransfer $user)
     {
-        if (
-            empty($user->getUsername()) ||
-            empty($user->getPassword())
+        if (empty($user->getUsername()) 
+            || empty($user->getPassword())
         ) {
             throw new ValidationException("Id or password cannot be empty");
         }

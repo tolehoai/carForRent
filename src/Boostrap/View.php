@@ -5,7 +5,7 @@ namespace Tolehoai\CarForRent\Boostrap;
 class View
 {
     /**
-     * @param string $view
+     * @param  string $view
      * @return array|false|string|string[]
      */
     public static function renderView(string $view, $params = [])

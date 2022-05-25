@@ -55,12 +55,14 @@ class UserController extends Controller
             $errorMessage = 'The our system went something wrong!';
         }
 
-        return View::renderView('login', [
+        return View::renderView(
+            'login', [
             'title' => 'Login',
             'username' => $this->userTransfer->getUsername(),
             'password' => $this->userTransfer->getPassword(),
             'error' => $errorMessage,
-        ]);
+            ]
+        );
     }
 
 

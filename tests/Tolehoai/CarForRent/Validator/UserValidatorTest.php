@@ -12,7 +12,7 @@ class UserValidatorTest extends TestCase
 {
     /**
      * @dataProvider LoginValidatorSuccessDataProvider
-     * @return void
+     * @return       void
      */
     public function testLoginValidatorSuccess($params, $expected): void
     {
@@ -57,7 +57,7 @@ class UserValidatorTest extends TestCase
 
     /**
      * @dataProvider LoginValidatorExceptionDataProvider
-     * @return void
+     * @return       void
      */
     public function testLoginValidatorException($params, $expected): void
     {

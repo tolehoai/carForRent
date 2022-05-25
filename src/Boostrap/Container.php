@@ -17,8 +17,8 @@ class Container
     /**
      * Lấy ra instance từ Container
      *
-     * @param $abstract
-     * @param array $parameters
+     * @param  $abstract
+     * @param  array $parameters
      * @return mixed|object
      * @throws ReflectionException
      */
@@ -44,8 +44,8 @@ class Container
     }
 
     /**
-     * @param $concrete
-     * @param $parameters
+     * @param  $concrete
+     * @param  $parameters
      * @return mixed|object
      * @throws ReflectionException
      */
@@ -74,7 +74,7 @@ class Container
     }
 
     /**
-     * @param $parameters
+     * @param  $parameters
      * @return array
      * @throws Exception
      */
@@ -83,7 +83,7 @@ class Container
         $dependencies = [];
 
         foreach ($parameters as $parameter) {
-//            $dependency = $parameter->getClass();
+            //            $dependency = $parameter->getClass();
             $dependency = new ReflectionClass($parameter->getType()->getName());
             if (!is_null($dependency)) {
                 $dependencies[] = $this->make($dependency->name);

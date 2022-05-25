@@ -13,49 +13,55 @@ class SessionService
 
     private $sessionRepository;
     private $userRepository;
+    private $cookieService;
+    private $randomService;
 
-    public function __construct(SessionRepository $sessionRepository, UserRepository $userRepository)
-    {
+
+
+    public function __construct(
+        SessionRepository $sessionRepository,
+        UserRepository $userRepository,
+        CookieService $cookieService,
+        RandomService $randomService
+    ) {
         $this->sessionRepository = $sessionRepository;
         $this->userRepository = $userRepository;
+        $this->cookieService = $cookieService;
+        $this->randomService = $randomService;
     }
 
     public function create($userId)
     {
         $session = new Session();
-        $session->id = $this->getUniqueId();
+        $session->id = $this->randomService->getUniqueId();
         $session->userId = $userId;
         $this->sessionRepository->save($session);
-        $this->setCookie($session);
+        $this->cookieService->setCookie($session);
         return $session;
     }
 
-    private function getUniqueId(){
-        return uniqid();
-    }
-    //RandomService
-    private function setCookie(Session $session){
-        setcookie(self::$COOKIE_NAME, $session->id, time() + (60 * 60 * 24), '/');
-        setcookie(self::$COOKIE_USERNAME, $session->userId, time() + (60 * 60 * 24), '/');
-    }
-    //Move Cookie to CookieService
 
 
-    public function destroy()
+    public function destroy() :bool
     {
-        $sessionId = $_COOKIE[self::$COOKIE_NAME] ?? '';
-        var_dump($_COOKIE[self::$COOKIE_NAME]);
+        $sessionId = $this->cookieService->getCookie(self::$COOKIE_NAME);
 
-        $this->sessionRepository->deleteById($sessionId);
-        setcookie(self::$COOKIE_NAME,'',1,'/');
-        setcookie(self::$COOKIE_USERNAME,'',1,'/');
+        if(!$this->sessionRepository->deleteById($sessionId)) {
+            return false;
+        }
+
+        $session = new Session();
+        $session->setId('');
+        $session->setUserId('');
+        $this->cookieService->setCookie($session);
+        return true;
     }
 
     public function current()
     {
-        $sessionId = $_COOKIE[self::$COOKIE_NAME] ?? '';
+        $sessionId = $this->cookieService->getCookie(self::$COOKIE_NAME);
         $session = $this->sessionRepository->findById($sessionId);
-        if($session == null){
+        if ($session == null) {
             return null;
         }
         return $this->userRepository->findById($session->userId);

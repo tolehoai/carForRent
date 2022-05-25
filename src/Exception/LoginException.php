@@ -6,5 +6,7 @@ use Exception;
 
 class LoginException extends Exception
 {
-
+    /**
+     * @expectedException LoginException
+     */
 }

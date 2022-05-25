@@ -5,7 +5,6 @@ namespace Tolehoai\CarForRent\Transfer;
 use Tolehoai\CarForRent\Boostrap\Request;
 
 class UserTransfer extends Request
-
 {
     /**
      * @var string|null
@@ -26,7 +25,7 @@ class UserTransfer extends Request
     }
 
     /**
-     * @param string|null $username
+     * @param  string|null $username
      * @return UserTransfer
      */
     public function setUsername(?string $username): UserTransfer
@@ -44,7 +43,7 @@ class UserTransfer extends Request
     }
 
     /**
-     * @param string|null $password
+     * @param  string|null $password
      * @return UserTransfer
      */
     public function setPassword(?string $password): UserTransfer
@@ -54,7 +53,7 @@ class UserTransfer extends Request
     }
 
     /**
-     * @param array $params
+     * @param  array $params
      * @return void
      */
     public function fromArray(array $params)

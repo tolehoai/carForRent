@@ -27,6 +27,7 @@ class UserRepository
 
         $user = new User();
         $row = $statement->fetch();
+
         if (!$row) {
             return null;
         }
@@ -38,14 +39,27 @@ class UserRepository
 
     public function save(User $user): User
     {
-        $statement = DatabaseConnection::getConnection()->prepare(
-            "INSERT INTO user(user_ID,user_username,user_password) VALUES (?, ?, ?)"
+        $query = 'INSERT INTO user(user_ID,user_username,user_password) VALUES (?, ?, ?)';
+        $statement = $this->connection->prepare($query);
+        $statement->execute(
+            [
+            $user->getId(),
+            $user->getUsername(),
+            $user->getPassword()
+            ]
         );
-        $statement->execute([
-            $user->id,
-            $user->name,
-            $user->password
-        ]);
         return $user;
+    }
+
+    public function deleteById(string $userId): bool
+    {
+        $query = 'DELETE FROM `rentcar`.`user` WHERE (`user_ID` = ?);';
+        $statement = $this->connection->prepare($query);
+        $statement->execute(
+            [
+            $userId
+            ]
+        );
+        return true;
     }
 }

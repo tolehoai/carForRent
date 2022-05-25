@@ -3,6 +3,7 @@
 namespace Test\Tolehoai\CarForRent\Service;
 
 use PHPUnit\Framework\TestCase;
+use Tolehoai\CarForRent\Model\User;
 use Tolehoai\CarForRent\Repository\UserRepository;
 use Tolehoai\CarForRent\Service\SessionService;
 use Tolehoai\CarForRent\Service\UserService;
@@ -12,6 +13,7 @@ class UserServiceTest extends TestCase
 {
     /**
      *  * @dataProvider loginDataProviderSuccess
+     *
      * @return void
      */
     public function testLoginSuccess($params, $expected)
@@ -57,19 +59,21 @@ class UserServiceTest extends TestCase
                 'params' => [
                     'username' => 'user1',
                     'password' => '123',
-                    'user' => $this->getUser('tolehoai', '$2a$12$.nA9eaCwOT5pxb/NNPpFuebd9uj0De/pkqMBDPITLPYVrj808FkEG')
+                    'user' => $this->getUser('tolehoai', '1$2a$12$.nA9eaCwOT5pxb/NNPpFuebd9uj0De/pkqMBDPITLPYVrj808FkEG')
                 ],
                 'expected' =>
                     false
             ],
+
         ];
     }
 
 
-    private function getUser(string $username, string $password): UserTransfer
+    private function getUser(string $username, string $password): User
     {
-        $user = new UserTransfer();
-        $user->setUsername($username)->setPassword($password);
+        $user = new User();
+        $user->setUsername($username);
+        $user->setPassword($password);
         return $user;
     }
 }

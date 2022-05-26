@@ -50,32 +50,6 @@ class SessionServiceTest extends TestCase
         $this->assertEquals($expected, $result);
     }
 
-    public function testCurrent()
-    {
-        $sessionRepository = new SessionRepository();
-        $session = new Session();
-        $session->setId(123);
-        $session->setUserId('tolehoai1');
-        $sessionRepository->save($session);
-        $user = $sessionRepository->findById(123);
-
-        $databaseService = new DatabaseService();
-        $userRepository = new UserRepository($databaseService);
-        $result = $userRepository->findByUsername($user->getUserId());
-
-        $expected = new User();
-        $expected->setId(1);
-        $expected->setUsername('tolehoai');
-        $expected->setPassword('$2a$12$8ZNPfOHWY9Tq9IzhJd91XuB8IH4hB4wTSP0/tWLhecxDFoGY1ROYW');
-        $this->assertEquals($expected, $result);
-    }
-
-    public function testCurrentFailed()
-    {
-        $sessionRepository = new SessionRepository();
-        $result = $sessionRepository->findById(456);
-        $this->assertEquals(false, $result);
-    }
 
     /**
      * @return void

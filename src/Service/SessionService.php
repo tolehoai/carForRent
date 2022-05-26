@@ -57,13 +57,5 @@ class SessionService
         return true;
     }
 
-    public function current()
-    {
-        $sessionId = $this->cookieService->getCookie(self::$COOKIE_NAME);
-        $session = $this->sessionRepository->findById($sessionId);
-        if ($session == null) {
-            return null;
-        }
-        return $this->userRepository->findById($session->userId);
-    }
+
 }

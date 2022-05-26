@@ -54,8 +54,4 @@ class SessionRepositoryTest extends TestCase
         $expected = true;
         $this->assertEquals($expected, $result);
     }
-
-
-
-
 }

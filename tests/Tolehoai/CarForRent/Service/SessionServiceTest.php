@@ -63,7 +63,7 @@ class SessionServiceTest extends TestCase
         $userRepository = new UserRepository($databaseService);
         $result = $userRepository->findByUsername($user->getUserId());
 
-        $expected= new User();
+        $expected = new User();
         $expected->setId(1);
         $expected->setUsername('tolehoai');
         $expected->setPassword('$2a$12$8ZNPfOHWY9Tq9IzhJd91XuB8IH4hB4wTSP0/tWLhecxDFoGY1ROYW');
@@ -78,7 +78,7 @@ class SessionServiceTest extends TestCase
     }
 
     /**
-     * @return               void
+     * @return void
      * @runInSeparateProcess
      */
     public function testDestroy()
@@ -91,7 +91,10 @@ class SessionServiceTest extends TestCase
         $randomService = $this->getMockBuilder(RandomService::class)->disableOriginalConstructor()->getMock();
         $cookieService = new CookieService();
         $sessionService = new SessionService(
-            $sessionRepositoryMock, $userRepositoryMock, $cookieService, $randomService
+            $sessionRepositoryMock,
+            $userRepositoryMock,
+            $cookieService,
+            $randomService
         );
         $result = $sessionService->destroy();
 
@@ -108,12 +111,13 @@ class SessionServiceTest extends TestCase
         $randomService = $this->getMockBuilder(RandomService::class)->disableOriginalConstructor()->getMock();
         $cookieService = new CookieService();
         $sessionService = new SessionService(
-            $sessionRepositoryMock, $userRepositoryMock, $cookieService, $randomService
+            $sessionRepositoryMock,
+            $userRepositoryMock,
+            $cookieService,
+            $randomService
         );
         $result = $sessionService->destroy();
 
         $this->assertFalse($result);
     }
-
-
 }

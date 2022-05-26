@@ -17,7 +17,7 @@ Route::get('/contact', [new SiteController(), 'contact']);
 Route::post('/contact', [new  SiteController(), 'handleContact']);
 Route::get(
     '/login',
-    [UserController::class, 'login']
+    [UserController::class, 'loginAction']
 );
 Route::post(
     '/login',

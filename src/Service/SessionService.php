@@ -42,11 +42,11 @@ class SessionService
 
 
 
-    public function destroy() :bool
+    public function destroy(): bool
     {
         $sessionId = $this->cookieService->getCookie(self::$COOKIE_NAME);
 
-        if(!$this->sessionRepository->deleteById($sessionId)) {
+        if (!$this->sessionRepository->deleteById($sessionId)) {
             return false;
         }
 
@@ -66,5 +66,4 @@ class SessionService
         }
         return $this->userRepository->findById($session->userId);
     }
-
 }

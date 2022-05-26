@@ -22,7 +22,7 @@ class Application
      */
     public Response $response;
 
-    public function __construct($rootPath)
+    public function __construct(string $rootPath)
     {
         self::$ROOT_DIR = $rootPath;
         self::$application = $this;

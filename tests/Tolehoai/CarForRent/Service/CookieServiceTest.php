@@ -8,5 +8,4 @@ use Tolehoai\CarForRent\Service\CookieService;
 
 class CookieServiceTest extends TestCase
 {
-
 }

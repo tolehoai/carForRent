@@ -36,21 +36,21 @@ class UserValidatorTest extends TestCase
         return [
             'case-1' => [
                 'params' => [
-                    'userRequest'=> $request1
+                    'userRequest' => $request1
                 ],
-                'expected'=> true
+                'expected' => true
             ],
             'case-2' => [
                 'params' => [
-                    'userRequest'=> $request2
+                    'userRequest' => $request2
                 ],
-                'expected'=> true
+                'expected' => true
             ],
             'case-3' => [
                 'params' => [
-                    'userRequest'=> $request3
+                    'userRequest' => $request3
                 ],
-                'expected'=> true
+                'expected' => true
             ]
         ];
     }
@@ -80,24 +80,22 @@ class UserValidatorTest extends TestCase
         return [
             'case-1' => [
                 'params' => [
-                    'userRequest'=> $request1
+                    'userRequest' => $request1
                 ],
-                'expected'=> true
+                'expected' => true
             ],
             'case-2' => [
                 'params' => [
-                    'userRequest'=> $request2
+                    'userRequest' => $request2
                 ],
-                'expected'=> true
+                'expected' => true
             ],
             'case-3' => [
                 'params' => [
-                    'userRequest'=> $request3
+                    'userRequest' => $request3
                 ],
-                'expected'=> true
+                'expected' => true
             ]
         ];
     }
-
-
 }

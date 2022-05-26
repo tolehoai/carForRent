@@ -17,7 +17,7 @@ class Request
         return substr($path, 0, $position);
     }
 
-    public function isPost()
+    public function isPost(): bool
     {
         return $this->getMethod() === 'post';
     }
@@ -30,7 +30,7 @@ class Request
         return strtolower($_SERVER['REQUEST_METHOD']);
     }
 
-    public function getBody()
+    public function getBody(): array
     {
         $body = [];
         if ($this->isGet()) {
@@ -46,7 +46,7 @@ class Request
         return $body;
     }
 
-    public function isGet()
+    public function isGet(): bool
     {
         return $this->getMethod() === 'get';
     }

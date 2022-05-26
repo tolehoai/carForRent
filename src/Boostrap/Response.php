@@ -6,8 +6,7 @@ use http\Client\Curl\User;
 
 class Response
 {
-    public $message = [];
-
+    public array $message = [];
     /**
      * @return array
      */
@@ -25,7 +24,7 @@ class Response
     }
     public $user;
 
-    public static function setStatusCode(int $code)
+    public static function setStatusCode(int $code): void
     {
         http_response_code($code);
     }

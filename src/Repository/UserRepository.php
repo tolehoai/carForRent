@@ -21,7 +21,7 @@ class UserRepository
 
     public function findByUsername(string $username): ?User
     {
-        $query = 'SELECT * FROM user WHERE user_username = ?';
+        $query = 'SELECT * FROM user WHERE username = ?';
         $statement = $this->connection->prepare($query);
         $statement->execute([$username]);
 
@@ -31,15 +31,15 @@ class UserRepository
         if (!$row) {
             return null;
         }
-        $user->setId($row['user_ID']);
-        $user->setUsername($row['user_username']);
-        $user->setPassword($row['user_password']);
+        $user->setId($row['id']);
+        $user->setUsername($row['username']);
+        $user->setPassword($row['password']);
         return $user;
     }
 
     public function save(User $user): User
     {
-        $query = 'INSERT INTO user(user_ID,user_username,user_password) VALUES (?, ?, ?)';
+        $query = 'INSERT INTO user(id,username,password) VALUES (?, ?, ?)';
         $statement = $this->connection->prepare($query);
         $statement->execute(
             [
@@ -53,7 +53,7 @@ class UserRepository
 
     public function deleteById(string $userId): bool
     {
-        $query = 'DELETE FROM `rentcar`.`user` WHERE (`user_ID` = ?);';
+        $query = 'DELETE FROM `rentcar`.`user` WHERE (`id` = ?);';
         $statement = $this->connection->prepare($query);
         $statement->execute(
             [

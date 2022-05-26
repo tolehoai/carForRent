@@ -45,12 +45,10 @@ class UserRepositoryTest extends TestCase
     {
         $databaseService = new DatabaseService();
         $userRepository = new UserRepository($databaseService);
-        $user=new User();
+        $user = new User();
         $user->setId(2);
         $result = $userRepository->deleteById($user->getId());
         $expected = true;
         $this->assertEquals($expected, $result);
     }
-
-
 }

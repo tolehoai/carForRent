@@ -26,10 +26,9 @@ class SessionRepository
                 ]
             );
             return $session;
-        }catch (\Exception){
+        } catch (\Exception) {
             return false;
         }
-
     }
 
     public function findById($id): Session|bool
@@ -42,7 +41,6 @@ class SessionRepository
             $row = $statement->fetch();
             if (!$row) {
                 return false;
-
             }
             $session->id = $row['idsession'];
             $session->userId = $row['user_id'];
@@ -61,12 +59,11 @@ class SessionRepository
             $id
             ]
         );
-        $row = $statement->rowCount();;
-        if ($row>0) {
+        $row = $statement->rowCount();
+        ;
+        if ($row > 0) {
             return true;
         }
         return false;
     }
-
-
 }

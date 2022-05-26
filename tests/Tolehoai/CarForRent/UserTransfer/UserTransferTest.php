@@ -32,8 +32,8 @@ class UserTransferTest extends TestCase
     public function testFromArray()
     {
         $params = [
-            'username'=>'tolehoai',
-            'password'=>'tolehoai'
+            'username' => 'tolehoai',
+            'password' => 'tolehoai'
         ];
         $user = new UserTransfer();
         $result = $user->fromArray($params);
@@ -41,6 +41,5 @@ class UserTransferTest extends TestCase
         $expected->setUsername('tolehoai');
         $expected->setPassword('tolehoai');
         $this->assertEquals($expected, $result);
-
     }
 }

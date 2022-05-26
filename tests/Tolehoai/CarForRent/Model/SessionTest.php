@@ -7,7 +7,6 @@ use Tolehoai\CarForRent\Model\Session;
 
 class SessionTest extends TestCase
 {
-
     public function testGetId()
     {
         $session = new Session();

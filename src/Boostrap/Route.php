@@ -23,7 +23,7 @@ class Route
         self::$response = $response;
     }
 
-    public static function get(tring $path, $callback): void
+    public static function get(string $path, $callback): void
     {
         self::$route['get'][$path] = $callback;
     }
@@ -33,7 +33,7 @@ class Route
         static::$route['post'][$path] = $callback;
     }
 
-    public static function resolve(): array|bool|string
+    public static function resolve()
     {
         $container = new Container();
         $path = self::$request->getPath();

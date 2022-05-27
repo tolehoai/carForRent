@@ -2,6 +2,7 @@
 
 use Tolehoai\CarForRent\Boostrap\Route;
 use Tolehoai\CarForRent\Controller\SiteController;
+use Tolehoai\CarForRent\Controller\UserApiController;
 use Tolehoai\CarForRent\Controller\UserController;
 use Tolehoai\CarForRent\Database\DatabaseConnection;
 
@@ -13,8 +14,6 @@ $connection = DatabaseConnection::getConnection();
 //$userValidator = new UserValidator();
 
 Route::get('/', [SiteController::class, 'home']);
-Route::get('/contact', [new SiteController(), 'contact']);
-Route::post('/contact', [new  SiteController(), 'handleContact']);
 Route::get(
     '/login',
     [UserController::class, 'loginAction']
@@ -38,3 +37,8 @@ Route::post(
 Route::get('/about', 'about');
 
 Route::get('/404', '404');
+
+Route::post(
+    '/api/login',
+    [UserApiController::class, 'login']
+);

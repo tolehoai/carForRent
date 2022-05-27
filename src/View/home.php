@@ -40,9 +40,9 @@
                 <?php
                 if (isset($_COOKIE["X-SESSION"])) {
                     echo '<form action="logout" method="post">';
-                    echo ' <li class="nav-item">';
+                    echo ' <div class="nav-item">';
                     echo ' <a class="nav-link d-inline-block">Hello ' . $_COOKIE["X-SESSION-USERNAME"] . '</a>';
-                    echo ' </li>';
+                    echo ' </div>';
                     echo ' <button class="btn btn-lg btn-primary h-25" type="submit">Sign out</button>';
                     echo '</form>';
                 }

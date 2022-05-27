@@ -24,10 +24,7 @@ class Response
     }
     public $user;
 
-    public static function setStatusCode(int $code): void
-    {
-        http_response_code($code);
-    }
+
 
 
     /**
@@ -44,5 +41,34 @@ class Response
     public function setUser($user): void
     {
         $this->user = $user;
+    }
+    private int $statusCode;
+
+    /**
+     * @return int
+     */
+    public function getStatusCode(): int
+    {
+        return $this->statusCode;
+    }
+
+    /**
+     * @param int $statusCode
+     */
+    public function setStatusCode(int $statusCode): void
+    {
+        $this->statusCode = $statusCode;
+        http_response_code($statusCode);
+    }
+
+    public function setResponseDataSuccess($data){
+        $this->setStatusCode(200);
+        header('Content-Type: application/json; charset=utf-8');
+        return json_encode($data);
+    }
+    public function setResponseDataFailed(string $error){
+        $this->setStatusCode(406);
+        header('Content-Type: application/json; charset=utf-8');
+        return json_encode(["errorMessage"=>$error],true);
     }
 }

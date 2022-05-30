@@ -55,9 +55,9 @@ class UserApiController extends Controller
                 $errorMessage = 'Username or Password Invalid';
                 return $this->response->setResponseDataFailed($errorMessage);
             }
-            $accessToken = $this->tokenService->create();
+            $accessToken = $this->tokenService->createUserLoginToken($userTransformer);
 
-            return $this->response->setResponseDataSuccess([...$userTransformer,'AccessToken'=>$accessToken]);
+            return $this->response->setResponseDataSuccess([...$userTransformer,'token'=>$accessToken]);
         } catch (\Exception $exception) {
             $errorMessage = $exception->getMessage();
         }

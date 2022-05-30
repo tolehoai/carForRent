@@ -17,7 +17,6 @@ class SessionService
     private $randomService;
 
 
-
     public function __construct(
         SessionRepository $sessionRepository,
         UserRepository $userRepository,
@@ -33,13 +32,12 @@ class SessionService
     public function create($userId)
     {
         $session = new Session();
-        $session->id = $this->randomService->getUniqueId();
-        $session->userId = $userId;
+        $session->setId($this->randomService->getUniqueId());
+        $session->setUserId($userId);
         $this->sessionRepository->save($session);
         $this->cookieService->setCookie($session);
         return $session;
     }
-
 
 
     public function destroy(): bool

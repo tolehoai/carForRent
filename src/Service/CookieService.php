@@ -14,8 +14,8 @@ class CookieService
 
     public function setCookie(Session $session)
     {
-        setcookie(self::$COOKIE_NAME, $session->id, time() + (60 * 60 * 24), '/');
-        setcookie(self::$COOKIE_USERNAME, $session->userId, time() + (60 * 60 * 24), '/');
+        setcookie(self::$COOKIE_NAME, $session->getId(), time() + (60 * 60 * 24), '/');
+        setcookie(self::$COOKIE_USERNAME, $session->getUserId(), time() + (60 * 60 * 24), '/');
     }
     public function getCookie(string $cookieName)
     {

@@ -5,19 +5,18 @@ namespace Tolehoai\CarForRent\Service;
 use Dotenv\Dotenv;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
+use Tolehoai\CarForRent\Transformer\UserTransformer;
 
 class TokenService
 {
     protected static $dotenv;
-    public function create(){
+    public function createUserLoginToken($userTransformer){
         $dotenv = Dotenv::createImmutable(__DIR__ . "/../../");
         self::$dotenv = $dotenv->load();
         $key = $_ENV['SECRET_KEY'];
         $payload = [
-            'iss' => 'http://example.org',
-            'aud' => 'http://example.com',
-            'iat' => 1356999524,
-            'nbf' => 1357000000
+           'id'=>$userTransformer['id'],
+            'username'=>$userTransformer['username']
         ];
         $jwt = JWT::encode($payload, $key, 'HS256');
 

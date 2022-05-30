@@ -11,11 +11,15 @@ class UserTransformer
      * @param  UserTransfer|User $model
      * @return void
      */
+
     public function transform($model): array
     {
         return [
             'id' => $model->getId(),
             'username' => $model->getUsername(),
         ];
+    }
+    public function getId($model){
+        return $model->getId();
     }
 }

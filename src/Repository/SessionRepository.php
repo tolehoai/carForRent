@@ -21,8 +21,8 @@ class SessionRepository
             $statement = $this->connection->prepare($query);
             $statement->execute(
                 [
-                $session->id,
-                $session->userId
+                $session->getId(),
+                $session->getUserId()
                 ]
             );
             return $session;
@@ -42,8 +42,8 @@ class SessionRepository
             if (!$row) {
                 return false;
             }
-            $session->id = $row['idsession'];
-            $session->userId = $row['user_id'];
+            $session->setId($row['idsession'])  ;
+            $session->setUserId( $row['user_id']);
             return $session;
         } finally {
             $statement->closeCursor();

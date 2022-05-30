@@ -4,7 +4,7 @@ namespace Tolehoai\CarForRent\Model;
 
 class Session
 {
-    public $id;
+    private $id;
 
     /**
      * @return mixed
@@ -37,5 +37,5 @@ class Session
     {
         $this->userId = $userId;
     }
-    public $userId;
+    private $userId;
 }

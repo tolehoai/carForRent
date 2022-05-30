@@ -3,7 +3,6 @@
 namespace Tolehoai\CarForRent\Repository;
 
 use PDO;
-use Tolehoai\CarForRent\Database\DatabaseConnection;
 use Tolehoai\CarForRent\Model\User;
 use Tolehoai\CarForRent\Service\DatabaseService;
 
@@ -43,9 +42,9 @@ class UserRepository
         $statement = $this->connection->prepare($query);
         $statement->execute(
             [
-            $user->getId(),
-            $user->getUsername(),
-            $user->getPassword()
+                $user->getId(),
+                $user->getUsername(),
+                $user->getPassword()
             ]
         );
         return $user;
@@ -57,7 +56,7 @@ class UserRepository
         $statement = $this->connection->prepare($query);
         $statement->execute(
             [
-            $userId
+                $userId
             ]
         );
         return true;

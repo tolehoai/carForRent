@@ -19,7 +19,5 @@ class UserTransformer
             'username' => $model->getUsername(),
         ];
     }
-    public function getId($model){
-        return $model->getId();
-    }
+
 }

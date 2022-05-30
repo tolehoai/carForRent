@@ -13,8 +13,11 @@ class UserService
     private UserTransformer $userTransformer;
 
 
-    public function __construct(UserRepository $userRepository, SessionService $sessionService, UserTransformer $userTransformer)
-    {
+    public function __construct(
+        UserRepository $userRepository,
+        SessionService $sessionService,
+        UserTransformer $userTransformer
+    ) {
         $this->userRepository = $userRepository;
         $this->sessionService = $sessionService;
         $this->userTransformer = $userTransformer;

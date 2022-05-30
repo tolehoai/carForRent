@@ -44,6 +44,7 @@ class UserController extends Controller
             $this->userValidator->validateUserLogin($this->userTransfer);
 
             $isLoginSuccess = $this->userService->login($this->userTransfer);
+
             if ($isLoginSuccess) {
                 return View::redirect("/");
             }

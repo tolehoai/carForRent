@@ -1,0 +1,45 @@
+<?php
+
+namespace Tolehoai\CarForRent\Repository;
+
+use PDO;
+use Tolehoai\CarForRent\Model\Car;
+use Tolehoai\CarForRent\Service\DatabaseService;
+use Tolehoai\CarForRent\Transformer\CarTransformer;
+
+class CarRepository
+{
+    private PDO $connection;
+    private CarTransformer $carTransformer;
+    public function __construct(DatabaseService $databaseService, CarTransformer $carTransformer)
+    {
+        $this->connection = $databaseService->getConnection();
+        $this->carTransformer = $carTransformer;
+    }
+
+    public function findAll(int $limit, int $offset)
+    {
+        $query = "SELECT * FROM car LIMIT :offset,:limit";
+        $statement = $this->connection->prepare($query);
+        $statement->bindValue('offset',$offset, PDO::PARAM_INT);
+        $statement->bindValue('limit',$limit, PDO::PARAM_INT);
+        $statement->execute();
+        $row = $statement->fetchAll();
+
+        if (!$row) {
+            return [];
+        }
+        $carList = [];
+        foreach ($row as $result) {
+            $car = new Car();
+            $car->setId($result['id']);
+            $car->setBrand($result['brand']);
+            $car->setColor($result['color']);
+            $car->setName($result['name']);
+            $car->setImg($result['img']);
+            $arr = $this->carTransformer->transform($car);
+            array_push($carList, $arr);
+        }
+        return $carList;
+    }
+}

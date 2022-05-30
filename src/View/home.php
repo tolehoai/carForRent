@@ -1,265 +1,341 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="#">Navbar</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+
+
+<body>
+
+
+<div class="site-wrap" id="home-section">
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Car Rental</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/">Home</a>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/about">About</a>
+                    <a class="nav-link" href="#">About</a>
                 </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                       data-bs-toggle="dropdown" aria-expanded="false">
-                        Dropdown
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#">Action</a></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
-                    </ul>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Service</a>
                 </li>
-                <?php
-                if (!isset($_COOKIE["X-SESSION"])) {
-                    echo '<li class="nav-item"><a class="nav-link" href="/login">Login</a></li>';
-                }
-                ?>
-
-
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Pricing</a>
+                </li>
 
             </ul>
-            <form class="d-flex" method="post" action="logout">
-                <?php
-                if (isset($_COOKIE["X-SESSION"])) {
-                    echo '<form action="logout" method="post">';
-                    echo ' <div class="nav-item">';
-                    echo ' <a class="nav-link d-inline-block">Hello ' . $_COOKIE["X-SESSION-USERNAME"] . '</a>';
-                    echo ' </div>';
-                    echo ' <button class="btn btn-lg btn-primary h-25" type="submit">Sign out</button>';
-                    echo '</form>';
-                }
-                ?>
-            </form>
+
         </div>
-    </div>
-</nav>
-<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-    <div class="carousel-inner imageWrapper">
-        <div class="carousel-item active h-100">
-            <img src="https://grandcarrentalv1.b-cdn.net/wp-content/uploads/2017/01/15C1119_043-1280x849-960x550.jpg"
-                 class="d-block img-fluid w-100 headerImg" alt="...">
-        </div>
-        <div class="carousel-item h-100">
-            <img src="https://grandcarrentalv1.b-cdn.net/wp-content/uploads/2017/01/2016-Mercedes-Benz-GLE-2-960x550.jpg"
-                 class="d-block img-fluid w-100 headerImg" alt="...">
-        </div>
-        <div class="carousel-item h-100">
-            <img src="https://grandcarrentalv1.b-cdn.net/wp-content/uploads/2017/01/mercedes-benz-cls-class-shooting-brake-13824-1920x1200-960x550.jpg"
-                 class="d-block img-fluid w-100 headerImg" alt="...">
-        </div>
-    </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-    </button>
-</div>
-<h1>Car List of <?php
-    echo $name ?></h1>
+        <?php
+        if (!isset($_COOKIE["X-SESSION"])) {
+            echo '<a class="nav-link" href="/login">Login</a>';
+        }
+        ?>
 
 
-<div class="album py-5 bg-light">
-    <div class="container">
 
-        <div class="row">
-            <div class="col-md-4">
-                <div class="card mb-4 box-shadow">
-                    <img class="card-img-top"
-                         src="http://pro-theme.com/html/isnaider/assets/media/content/b-goods/294x223/1.jpg"
-                         alt="Card image cap">
-                    <div class="card-body">
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                            additional content. This content is a little bit longer.</p>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                            </div>
-                            <small class="text-muted">9 mins</small>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card mb-4 box-shadow">
-                    <img class="card-img-top"
-                         src="http://pro-theme.com/html/isnaider/assets/media/content/b-goods/294x223/1.jpg"
-                         alt="Card image cap">
-                    <div class="card-body">
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                            additional content. This content is a little bit longer.</p>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                            </div>
-                            <small class="text-muted">9 mins</small>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card mb-4 box-shadow">
-                    <img class="card-img-top"
-                         src="http://pro-theme.com/html/isnaider/assets/media/content/b-goods/294x223/1.jpg"
-                         alt="Card image cap">
-                    <div class="card-body">
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                            additional content. This content is a little bit longer.</p>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                            </div>
-                            <small class="text-muted">9 mins</small>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card mb-4 box-shadow">
-                    <img class="card-img-top"
-                         src="http://pro-theme.com/html/isnaider/assets/media/content/b-goods/294x223/1.jpg"
-                         alt="Card image cap">
-                    <div class="card-body">
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                            additional content. This content is a little bit longer.</p>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                            </div>
-                            <small class="text-muted">9 mins</small>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card mb-4 box-shadow">
-                    <img class="card-img-top"
-                         src="http://pro-theme.com/html/isnaider/assets/media/content/b-goods/294x223/1.jpg"
-                         alt="Card image cap">
-                    <div class="card-body">
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                            additional content. This content is a little bit longer.</p>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                            </div>
-                            <small class="text-muted">9 mins</small>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card mb-4 box-shadow">
-                    <img class="card-img-top"
-                         src="http://pro-theme.com/html/isnaider/assets/media/content/b-goods/294x223/1.jpg"
-                         alt="Card image cap">
-                    <div class="card-body">
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                            additional content. This content is a little bit longer.</p>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                            </div>
-                            <small class="text-muted">9 mins</small>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card mb-4 box-shadow">
-                    <img class="card-img-top"
-                         src="http://pro-theme.com/html/isnaider/assets/media/content/b-goods/294x223/1.jpg"
-                         alt="Card image cap">
-                    <div class="card-body">
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                            additional content. This content is a little bit longer.</p>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                            </div>
-                            <small class="text-muted">9 mins</small>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card mb-4 box-shadow">
-                    <img class="card-img-top"
-                         src="http://pro-theme.com/html/isnaider/assets/media/content/b-goods/294x223/1.jpg"
-                         alt="Card image cap">
-                    <div class="card-body">
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                            additional content. This content is a little bit longer.</p>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                            </div>
-                            <small class="text-muted">9 mins</small>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card mb-4 box-shadow">
-                    <img class="card-img-top"
-                         src="http://pro-theme.com/html/isnaider/assets/media/content/b-goods/294x223/1.jpg"
-                         alt="Card image cap">
-                    <div class="card-body">
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                            additional content. This content is a little bit longer.</p>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                            </div>
-                            <small class="text-muted">9 mins</small>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+        </ul>
+        <form class="d-flex" method="post" action="logout">
+            <?php
+            if (isset($_COOKIE["X-SESSION"])) {
+                echo '<form action="logout" method="post">';
+                echo ' <div class="nav-item">';
+                echo ' <a class="nav-link d-inline-block">Hello ' . $_COOKIE["X-SESSION-USERNAME"] . '</a>';
+                echo ' </div>';
+                echo ' <button class="btn btn-lg btn-primary h-25" type="submit">Sign out</button>';
+                echo '</form>';
+            }
+            ?>
+    </nav>
 
 
-    <footer class="text-muted">
+    <div class="site-section">
         <div class="container">
-            <p class="float-right">
-                <a href="#">Back to top</a>
-            </p>
-            <p>Album example is &copy; Bootstrap, but please download and customize it for yourself!</p>
-            <p>New to Bootstrap? <a href="../../">Visit the homepage</a> or read our <a href="../../getting-started/">getting
-                    started guide</a>.</p>
+            <div class="row align-items-center">
+                <div class="col-lg-7 text-center order-lg-2">
+                    <div class="img-wrap-1 mb-5">
+                        <img src="assets/images/feature_01.png" alt="Image" class="img-fluid">
+                    </div>
+                </div>
+                <div class="col-lg-4 ml-auto order-lg-1">
+                    <h3 class="mb-4 section-heading"><strong>You can easily avail our promo for renting a car.</strong>
+                    </h3>
+                    <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae, explicabo
+                        iste a labore id est quas, doloremque veritatis! Provident odit pariatur dolorem quisquam,
+                        voluptatibus voluptates optio accusamus, vel quasi quidem!</p>
+
+                    <p><a href="#" class="btn btn-primary">Meet them now</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="site-section bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-7">
+                    <h2 class="section-heading"><strong>Car Listings</strong></h2>
+                    <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-md-6 col-lg-4 mb-4">
+
+                    <div class="listing d-block  align-items-stretch">
+                        <div class="listing-img h-100 mr-4">
+                            <img src="assets/images/car_6.jpg" alt="Image" class="img-fluid">
+                        </div>
+                        <div class="listing-contents h-100">
+                            <h3>Mitsubishi Pajero</h3>
+                            <div class="rent-price">
+                                <strong>$389.00</strong><span class="mx-1">/</span>day
+                            </div>
+                            <div class="d-block d-md-flex mb-3 border-bottom pb-3">
+                                <div class="listing-feature pr-4">
+                                    <span class="caption">Luggage:</span>
+                                    <span class="number">8</span>
+                                </div>
+                                <div class="listing-feature pr-4">
+                                    <span class="caption">Doors:</span>
+                                    <span class="number">4</span>
+                                </div>
+                                <div class="listing-feature pr-4">
+                                    <span class="caption">Passenger:</span>
+                                    <span class="number">4</span>
+                                </div>
+                            </div>
+                            <div>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos eos at eum, voluptatem
+                                    quibusdam.</p>
+                                <p><a href="#" class="btn btn-primary btn-sm">Rent Now</a></p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4 mb-4">
+
+                    <div class="listing d-block  align-items-stretch">
+                        <div class="listing-img h-100 mr-4">
+                            <img src="assets/images/car_5.jpg" alt="Image" class="img-fluid">
+                        </div>
+                        <div class="listing-contents h-100">
+                            <h3>Nissan Moco</h3>
+                            <div class="rent-price">
+                                <strong>$389.00</strong><span class="mx-1">/</span>day
+                            </div>
+                            <div class="d-block d-md-flex mb-3 border-bottom pb-3">
+                                <div class="listing-feature pr-4">
+                                    <span class="caption">Luggage:</span>
+                                    <span class="number">8</span>
+                                </div>
+                                <div class="listing-feature pr-4">
+                                    <span class="caption">Doors:</span>
+                                    <span class="number">4</span>
+                                </div>
+                                <div class="listing-feature pr-4">
+                                    <span class="caption">Passenger:</span>
+                                    <span class="number">4</span>
+                                </div>
+                            </div>
+                            <div>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos eos at eum, voluptatem
+                                    quibusdam.</p>
+                                <p><a href="#" class="btn btn-primary btn-sm">Rent Now</a></p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <div class="col-md-6 col-lg-4 mb-4">
+
+                    <div class="listing d-block  align-items-stretch">
+                        <div class="listing-img h-100 mr-4">
+                            <img src="assets/images/car_4.jpg" alt="Image" class="img-fluid">
+                        </div>
+                        <div class="listing-contents h-100">
+                            <h3>Honda Fitta</h3>
+                            <div class="rent-price">
+                                <strong>$389.00</strong><span class="mx-1">/</span>day
+                            </div>
+                            <div class="d-block d-md-flex mb-3 border-bottom pb-3">
+                                <div class="listing-feature pr-4">
+                                    <span class="caption">Luggage:</span>
+                                    <span class="number">8</span>
+                                </div>
+                                <div class="listing-feature pr-4">
+                                    <span class="caption">Doors:</span>
+                                    <span class="number">4</span>
+                                </div>
+                                <div class="listing-feature pr-4">
+                                    <span class="caption">Passenger:</span>
+                                    <span class="number">4</span>
+                                </div>
+                            </div>
+                            <div>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos eos at eum, voluptatem
+                                    quibusdam.</p>
+                                <p><a href="#" class="btn btn-primary btn-sm">Rent Now</a></p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4 mb-4">
+
+                    <div class="listing d-block  align-items-stretch">
+                        <div class="listing-img h-100 mr-4">
+                            <img src="assets/images/car_3.jpg" alt="Image" class="img-fluid">
+                        </div>
+                        <div class="listing-contents h-100">
+                            <h3>Skoda Laura</h3>
+                            <div class="rent-price">
+                                <strong>$389.00</strong><span class="mx-1">/</span>day
+                            </div>
+                            <div class="d-block d-md-flex mb-3 border-bottom pb-3">
+                                <div class="listing-feature pr-4">
+                                    <span class="caption">Luggage:</span>
+                                    <span class="number">8</span>
+                                </div>
+                                <div class="listing-feature pr-4">
+                                    <span class="caption">Doors:</span>
+                                    <span class="number">4</span>
+                                </div>
+                                <div class="listing-feature pr-4">
+                                    <span class="caption">Passenger:</span>
+                                    <span class="number">4</span>
+                                </div>
+                            </div>
+                            <div>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos eos at eum, voluptatem
+                                    quibusdam.</p>
+                                <p><a href="#" class="btn btn-primary btn-sm">Rent Now</a></p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4 mb-4">
+
+                    <div class="listing d-block  align-items-stretch">
+                        <div class="listing-img h-100 mr-4">
+                            <img src="assets/images/car_2.jpg" alt="Image" class="img-fluid">
+                        </div>
+                        <div class="listing-contents h-100">
+                            <h3>Mazda LaPuta</h3>
+                            <div class="rent-price">
+                                <strong>$389.00</strong><span class="mx-1">/</span>day
+                            </div>
+                            <div class="d-block d-md-flex mb-3 border-bottom pb-3">
+                                <div class="listing-feature pr-4">
+                                    <span class="caption">Luggage:</span>
+                                    <span class="number">8</span>
+                                </div>
+                                <div class="listing-feature pr-4">
+                                    <span class="caption">Doors:</span>
+                                    <span class="number">4</span>
+                                </div>
+                                <div class="listing-feature pr-4">
+                                    <span class="caption">Passenger:</span>
+                                    <span class="number">4</span>
+                                </div>
+                            </div>
+                            <div>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos eos at eum, voluptatem
+                                    quibusdam.</p>
+                                <p><a href="#" class="btn btn-primary btn-sm">Rent Now</a></p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <div class="col-md-6 col-lg-4 mb-4">
+
+                    <div class="listing d-block  align-items-stretch">
+                        <div class="listing-img h-100 mr-4">
+                            <img src="assets/images/car_1.jpg" alt="Image" class="img-fluid">
+                        </div>
+                        <div class="listing-contents h-100">
+                            <h3>Buick LaCrosse</h3>
+                            <div class="rent-price">
+                                <strong>$389.00</strong><span class="mx-1">/</span>day
+                            </div>
+                            <div class="d-block d-md-flex mb-3 border-bottom pb-3">
+                                <div class="listing-feature pr-4">
+                                    <span class="caption">Luggage:</span>
+                                    <span class="number">8</span>
+                                </div>
+                                <div class="listing-feature pr-4">
+                                    <span class="caption">Doors:</span>
+                                    <span class="number">4</span>
+                                </div>
+                                <div class="listing-feature pr-4">
+                                    <span class="caption">Passenger:</span>
+                                    <span class="number">4</span>
+                                </div>
+                            </div>
+                            <div>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos eos at eum, voluptatem
+                                    quibusdam.</p>
+                                <p><a href="#" class="btn btn-primary btn-sm">Rent Now</a></p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <footer class="site-footer">
+        <div class="container">
+
+            <div class="row pt-5 mt-5 text-center">
+                <div class="col-md-12">
+                    <div class="border-top pt-5">
+                        <p>
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                            Copyright &copy;<script>document.write(new Date().getFullYear());</script>
+                            <i class="icon-heart text-danger" aria-hidden="true"></i> by To Le Hoai</a>
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        </p>
+                    </div>
+                </div>
+
+            </div>
         </div>
     </footer>
 
+</div>
+<script src="assets/js/jquery-3.3.1.min.js"></script>
+<script src="assets/js/popper.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/owl.carousel.min.js"></script>
+<script src="assets/js/jquery.sticky.js"></script>
+<script src="assets/js/jquery.waypoints.min.js"></script>
+<script src="assets/js/jquery.animateNumber.min.js"></script>
+<script src="assets/js/jquery.fancybox.min.js"></script>
+<script src="assets/js/jquery.easing.1.3.js"></script>
+<script src="assets/js/bootstrap-datepicker.min.js"></script>
+<script src="assets/js/aos.js"></script>
 
+<script src="assets/js/main.js"></script>
 
+</body>
 
+</html>

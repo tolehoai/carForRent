@@ -2,16 +2,17 @@
 
 namespace Tolehoai\CarForRent\Repository;
 
-use Tolehoai\CarForRent\Database\DatabaseConnection;
+use PDO;
 use Tolehoai\CarForRent\Model\Session;
+use Tolehoai\CarForRent\Service\DatabaseService;
 
 class SessionRepository
 {
-    private $connection;
+    private PDO $connection;
 
-    public function __construct()
+    public function __construct(DatabaseService $databaseService)
     {
-        $this->connection = DatabaseConnection::getConnection();
+        $this->connection = $databaseService->getConnection();
     }
 
     public function save(Session $session): bool|Session
@@ -21,8 +22,8 @@ class SessionRepository
             $statement = $this->connection->prepare($query);
             $statement->execute(
                 [
-                $session->getId(),
-                $session->getUserId()
+                    $session->getId(),
+                    $session->getUserId()
                 ]
             );
             return $session;
@@ -42,8 +43,8 @@ class SessionRepository
             if (!$row) {
                 return false;
             }
-            $session->setId($row['idsession'])  ;
-            $session->setUserId( $row['user_id']);
+            $session->setId($row['idsession']);
+            $session->setUserId($row['user_id']);
             return $session;
         } finally {
             $statement->closeCursor();
@@ -56,11 +57,10 @@ class SessionRepository
         $statement = $this->connection->prepare($query);
         $statement->execute(
             [
-            $id
+                $id
             ]
         );
-        $row = $statement->rowCount();
-        ;
+        $row = $statement->rowCount();;
         if ($row > 0) {
             return true;
         }

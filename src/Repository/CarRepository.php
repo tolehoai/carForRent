@@ -37,6 +37,10 @@ class CarRepository
             $car->setColor($result['color']);
             $car->setName($result['name']);
             $car->setImg($result['img']);
+            $car->setLuggage($result['luggage']);
+            $car->setDoors($result['doors']);
+            $car->setPrice($result['price']);
+            $car->setPassenger($result['passenger']);
             $arr = $this->carTransformer->transform($car);
             array_push($carList, $arr);
         }

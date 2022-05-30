@@ -6,6 +6,74 @@ class Car
 {
     private int $id;
     private string $img;
+    private int $luggage;
+    private int $doors;
+    private int $passenger;
+
+    /**
+     * @return int
+     */
+    public function getPassenger(): int
+    {
+        return $this->passenger;
+    }
+
+    /**
+     * @param int $passenger
+     */
+    public function setPassenger(int $passenger): void
+    {
+        $this->passenger = $passenger;
+    }
+    /**
+     * @return int
+     */
+    public function getLuggage(): int
+    {
+        return $this->luggage;
+    }
+
+    /**
+     * @param int $luggage
+     */
+    public function setLuggage(int $luggage): void
+    {
+        $this->luggage = $luggage;
+    }
+
+    /**
+     * @return int
+     */
+    public function getDoors(): int
+    {
+        return $this->doors;
+    }
+
+    /**
+     * @param int $doors
+     */
+    public function setDoors(int $doors): void
+    {
+        $this->doors = $doors;
+    }
+
+    /**
+     * @return float
+     */
+    public function getPrice(): float
+    {
+        return $this->price;
+    }
+
+    /**
+     * @param float $price
+     */
+    public function setPrice(float $price): void
+    {
+        $this->price = $price;
+    }
+    private float $price;
+
 
     /**
      * @return string

@@ -18,7 +18,11 @@ class CarTransformer
             'name'=>$car->getName(),
             'brand'=>$car->getBrand(),
             'color'=>$car->getColor(),
-            'img'=>$car->getImg()
+            'img'=>$car->getImg(),
+            'luggage'=>$car->getLuggage(),
+            'doors'=>$car->getDoors(),
+            'price'=>$car->getPrice(),
+            'passenger'=>$car->getPassenger(),
         ];
     }
 

@@ -1801,3 +1801,14 @@ h1, h2, h3, h4, h5,
 .imageWrapper {
   height: 700px;
 }
+
+.car-card{
+  min-height: 300px;
+}
+
+.car-name {
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+

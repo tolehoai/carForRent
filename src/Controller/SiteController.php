@@ -22,7 +22,7 @@ class SiteController extends Controller
 
     public function home()
     {
-        $carList = $this->carRepository->findAll(10,0);
+        $carList = $this->carRepository->findAll(15,0);
 
         return View::renderView(
             'home',

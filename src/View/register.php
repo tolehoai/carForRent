@@ -107,7 +107,7 @@
         <form class="needs-validation" method="POST" action="register">
             <div class="row g-3 pt-2">
                 <div class="col-sm-12">
-                    <label for="firstName" class="form-label">User name</label>
+                    <label for="firstName" class="form-label">Email</label>
                     <input type="text" class="form-control" id="username" name="username" placeholder=""
                            value="">
                     <?php

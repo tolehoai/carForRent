@@ -107,7 +107,7 @@ class UserController extends Controller
             return View::renderView(
                 'register',
                 [
-                    'error' => 'User Exits',
+                    'failed' => 'User Exits',
                 ]
             );
         }

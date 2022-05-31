@@ -41,8 +41,9 @@ class CarRepository
             $car->setDoors($result['doors']);
             $car->setPrice($result['price']);
             $car->setPassenger($result['passenger']);
-            $arr = $this->carTransformer->transform($car);
-            array_push($carList, $arr);
+
+            $carTransformer = $this->carTransformer->transform($car);
+            array_push($carList, $carTransformer);
         }
         return $carList;
     }

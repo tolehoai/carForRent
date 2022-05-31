@@ -30,6 +30,7 @@
         <?php
         if (!isset($_COOKIE["X-SESSION"])) {
             echo '<a class="nav-link" href="/login">Login</a>';
+            echo '<a class="nav-link" href="/register">Register</a>';
         }
         ?>
 
@@ -147,21 +148,3 @@
         </div>
     </footer>
 
-</div>
-<script src="assets/js/jquery-3.3.1.min.js"></script>
-<script src="assets/js/popper.min.js"></script>
-<script src="assets/js/bootstrap.min.js"></script>
-<script src="assets/js/owl.carousel.min.js"></script>
-<script src="assets/js/jquery.sticky.js"></script>
-<script src="assets/js/jquery.waypoints.min.js"></script>
-<script src="assets/js/jquery.animateNumber.min.js"></script>
-<script src="assets/js/jquery.fancybox.min.js"></script>
-<script src="assets/js/jquery.easing.1.3.js"></script>
-<script src="assets/js/bootstrap-datepicker.min.js"></script>
-<script src="assets/js/aos.js"></script>
-
-<script src="assets/js/main.js"></script>
-
-</body>
-
-</html>

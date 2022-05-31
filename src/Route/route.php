@@ -24,11 +24,11 @@ Route::post(
 );
 Route::get(
     '/register',
-    [UserController::class, 'register']
+    [UserController::class, 'registerAction']
 );
 Route::post(
     '/register',
-    [UserController::class, 'handleRegister']
+    [UserController::class, 'registerAction']
 );
 Route::post(
     '/logout',

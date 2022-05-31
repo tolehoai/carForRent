@@ -5,17 +5,21 @@ namespace Tolehoai\CarForRent\Repository;
 use PDO;
 use Tolehoai\CarForRent\Model\User;
 use Tolehoai\CarForRent\Service\DatabaseService;
+use Tolehoai\CarForRent\Transfer\RegisterTransfer;
+use Tolehoai\CarForRent\Transformer\UserTransformer;
 
 class UserRepository
 {
     private PDO $connection;
+    private UserTransformer $userTransformer;
 
     /**
      * @param DatabaseService $databaseService
      */
-    public function __construct(DatabaseService $databaseService)
+    public function __construct(DatabaseService $databaseService, UserTransformer $userTransformer)
     {
         $this->connection = $databaseService->getConnection();
+        $this->userTransformer = $userTransformer;
     }
 
     public function findByUsername(string $username): ?User
@@ -33,18 +37,18 @@ class UserRepository
         $user->setId($row['id']);
         $user->setUsername($row['username']);
         $user->setPassword($row['password']);
+
         return $user;
     }
 
-    public function save(User $user): User
+    public function save(RegisterTransfer $user): RegisterTransfer
     {
-        $query = 'INSERT INTO user(id,username,password) VALUES (?, ?, ?)';
+        $query = 'INSERT INTO user(username,password) VALUES (?, ?)';
         $statement = $this->connection->prepare($query);
         $statement->execute(
             [
-                $user->getId(),
                 $user->getUsername(),
-                $user->getPassword()
+                $user->getPassword(),
             ]
         );
         return $user;

@@ -24,7 +24,6 @@ class DatabaseConnection
 
         if (!self::$conn) {
             $host = $_ENV['HOST'];
-            ;
             $username = $_ENV['USERNAME'];
             $password = $_ENV['PASSWORD'];
             $database = $_ENV['DATABASE'];

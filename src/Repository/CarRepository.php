@@ -52,23 +52,27 @@ class CarRepository
         return $carList;
     }
 
-    public function save(CarTransfer $car): CarTransfer
+    public function save(CarTransfer $car): bool
     {
+        try {
+            $query = "INSERT INTO car( name, brand, color, img, luggage, doors, passenger, price) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?)";
+            $statement = $this->connection->prepare($query);
+            $statement->execute(
+                [
+                    $car->getName(),
+                    $car->getBrand(),
+                    $car->getColor(),
+                    $car->getImg(),
+                    $car->getLuggage(),
+                    $car->getDoors(),
+                    $car->getPassenger(),
+                    $car->getPrice(),
+                ]
+            );
+            return true;
+        }catch (\PDOException $e){
+            return false;
+    }
 
-        $query = "INSERT INTO car( name, brand, color, img, luggage, doors, passenger, price) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?)";
-        $statement = $this->connection->prepare($query);
-        $statement->execute(
-            [
-                $car->getName(),
-                $car->getBrand(),
-                $car->getColor(),
-                $car->getImg(),
-                $car->getLuggage(),
-                $car->getDoors(),
-                $car->getPassenger(),
-                $car->getPrice(),
-            ]
-        );
-        return $car;
     }
 }

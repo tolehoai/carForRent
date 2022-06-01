@@ -40,12 +40,31 @@ class CarController
             );
         }
         $this->carTransfer->fromArray($this->request->getBody());
-        $isUploadCarValid = $this->carValidator->validateCarUpload($this->carTransfer);
-        var_dump($isUploadCarValid);
-        die();
+        $isUploadCarValid = $this->carValidator->validateCarUpload($this->carTransfer,$_FILES['image']);
+
+        if(is_array($isUploadCarValid)){
+            return View::renderView(
+                'addcar',
+                ['error'=>$isUploadCarValid]
+            );
+        }
         $imageUrl = $this->uploadService->uploadImage($_FILES['image']);
         $this->carTransfer->setImg($imageUrl);
-        $this->carRepository->save($this->carTransfer);
+        $isAddCarSuccess = $this->carRepository->save($this->carTransfer);
+        if( !$isAddCarSuccess){
+            return View::renderView(
+                'addcar',
+                [
+                    'failed' => 'Add car to database failed',
+                ]
+            );
+        }
+        return View::renderView(
+            'addcar',
+            [
+                'success' => 'Add car Sucessfully!',
+            ]
+        );
     }
 
 

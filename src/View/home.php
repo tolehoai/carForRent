@@ -38,11 +38,14 @@
         <form class="d-flex" method="post" action="logout">
             <?php
             if (isset($_COOKIE["X-SESSION"])) {
+
                 echo '<form action="logout" method="post">';
                 echo ' <div class="nav-item">';
                 echo ' <a class="nav-link d-inline-block">Hello <b>' . $_COOKIE["X-SESSION-USERNAME"] . '</b> </a>';
                 echo ' </div>';
+                echo ' <a class="nav-link" href="/addCar" >Add Car</a>';
                 echo ' <button class="btn btn-lg btn-primary h-25" type="submit">Sign out</button>';
+
                 echo '</form>';
             }
             ?>

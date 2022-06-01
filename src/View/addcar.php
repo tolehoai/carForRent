@@ -1,3 +1,7 @@
+<?php
+    if(isset($error))
+        var_dump($error);
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -83,16 +87,38 @@
 <div class="row g-5 justify-content-center">
 
     <div class="col-md-5 col-lg-5">
+        <?php
+            if(isset($failed)){
+                echo ' <div class="alert alert-danger" role="alert">'.$failed.'</div>';
+            }
+        ?>
+        <?php
+        if(isset($success)){
+            echo ' <div class="alert alert-success" role="alert">'.$success.'</div>';
+        }
+        ?>
+
 
         <form class="needs-validation" method="POST" action="addCar" enctype="multipart/form-data">
 
-            <div class="mb-3">
+            <div class="mb-3 ">
                 <label for="exampleFormControlInput1" class="form-label">Name</label>
                 <input type="text" class="form-control" id="name" name="name">
+                <?php
+                    if(isset($error['name'])){
+                        echo ' <div style="color:red; font-style: italic">'.$error['name'].'</div>';
+                    }
+                ?>
+
             </div>
             <div class="mb-3">
                 <label for="exampleFormControlInput1" class="form-label">Brand</label>
                 <input type="text" class="form-control" id="brand" name="brand">
+                <?php
+                if(isset($error['brand'])){
+                    echo ' <div style="color:red; font-style: italic">'.$error['brand'].'</div>';
+                }
+                ?>
             </div>
             <label for="exampleColorInput" class="form-label">Color</label>
             <input type="color" class="form-control form-control-color" id="exampleColorInput" value="#563d7c"
@@ -102,39 +128,50 @@
                 <div class="col-md-6">
                     <label for="cc-name" class="form-label">Luggage</label>
                     <input type="text" class="form-control" placeholder="" name="luggage">
-
-                    <div class="invalid-feedback">
-                        Name on card is required
-                    </div>
+                    <?php
+                    if(isset($error['luggage'])){
+                        echo ' <div style="color:red; font-style: italic">'.$error['luggage'].'</div>';
+                    }
+                    ?>
                 </div>
 
                 <div class="col-md-6">
                     <label for="cc-number" class="form-label">Doors</label>
                     <input type="text" class="form-control" placeholder="" name="doors">
-                    <div class="invalid-feedback">
-                        Credit card number is required
-                    </div>
+                    <?php
+                    if(isset($error['doors'])){
+                        echo ' <div style="color:red; font-style: italic">'.$error['doors'].'</div>';
+                    }
+                    ?>
                 </div>
                 <div class="col-md-6">
                     <label for="cc-name" class="form-label">Passenger</label>
                     <input type="text" class="form-control" placeholder="" name="passenger">
-
-                    <div class="invalid-feedback">
-                        Name on card is required
-                    </div>
+                    <?php
+                    if(isset($error['name'])){
+                        echo ' <div style="color:red; font-style: italic">'.$error['passenger'].'</div>';
+                    }
+                    ?>
                 </div>
 
                 <div class="col-md-6">
                     <label for="cc-number" class="form-label">Price</label>
                     <input type="text" class="form-control" placeholder="" name="price">
-                    <div class="invalid-feedback">
-                        Add car
-                    </div>
+                    <?php
+                    if(isset($error['price'])){
+                        echo ' <div style="color:red; font-style: italic">'.$error['price'].'</div>';
+                    }
+                    ?>
                 </div>
 
             </div>
             <div class="mt-3">
                 <input class="form-control" type="file" id="image" name="image">
+                <?php
+                if(isset($error['price'])){
+                    echo ' <div style="color:red; font-style: italic">'.$error['image'].'</div>';
+                }
+                ?>
             </div>
             <hr class="my-4">
 

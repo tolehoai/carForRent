@@ -6,6 +6,7 @@ class Validator
 {
     public string $name;
     public $value;
+    public $file;
     public $patterns = array(
         'uri' => '[A-Za-z0-9-\/_?&=]+',
         'url' => '[A-Za-z0-9-:.\/_?&=#]+',
@@ -37,6 +38,12 @@ class Validator
         return $this;
     }
 
+    public function file($file){
+        $this->file = $file;
+        return $this;
+    }
+
+
     public function pattern($name)
     {
         if ($name == 'array') {
@@ -63,7 +70,7 @@ class Validator
 
     public function required()
     {
-        if ((isset($this->file) && $this->file['error'] == 4) || ($this->value == '' || $this->value == null)) {
+        if ((isset($this->file)) || ($this->value == '' || $this->value == null)) {
             $this->errors[$this->name] = 'Field value ' . $this->name . ' is required.';
         }
         return $this;
@@ -101,14 +108,16 @@ class Validator
     {
         return htmlspecialchars($string, ENT_QUOTES, 'UTF-8');
     }
-
-    public function maxSize($size)
+    public function checkSize(int $size)
     {
-        if ($this->file['error'] != 4 && $this->file['size'] > $size) {
-            $this->errors[$this->name] = 'The file ' . $this->name . ' exceeds the maximum size of ' . number_format(
-                    $size / 1048576,
-                    2
-                ) . ' MB.';
+        if (!empty($this->errors[$this->name])) {
+            return $this;
+        }
+        $maxsize = $size * 1024 * 1024;
+
+        if ($this->file['size'] > $maxsize) {
+            $this->errors[$this->name] = "File size is larger than $size MB.";
+
         }
         return $this;
     }

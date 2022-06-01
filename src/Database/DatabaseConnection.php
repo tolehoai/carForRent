@@ -31,7 +31,7 @@ class DatabaseConnection
         $database = $_ENV['DATABASE'];
 
         try {
-            self::$conn = new PDO("mysql:host=$host;dbname=$database;port=3336", $username, 'Tolehoai123!@#');
+            self::$conn = new PDO("mysql:host=$host;dbname=$database;port=3336", $username,  'Tolehoai1212!@!@');
             self::$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 //                            echo "Connected successfully";
         } catch (PDOException $e) {

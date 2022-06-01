@@ -50,6 +50,6 @@ Route::get(
 );
 
 Route::post(
-    '/addCarPost',
-    [CarController::class, 'addCarPost']
+    '/addCar',
+    [CarController::class, 'addCar']
 );

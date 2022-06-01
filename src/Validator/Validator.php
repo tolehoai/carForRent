@@ -102,6 +102,35 @@ class Validator
         return htmlspecialchars($string, ENT_QUOTES, 'UTF-8');
     }
 
+    public function maxSize($size)
+    {
+        if ($this->file['error'] != 4 && $this->file['size'] > $size) {
+            $this->errors[$this->name] = 'The file ' . $this->name . ' exceeds the maximum size of ' . number_format(
+                    $size / 1048576,
+                    2
+                ) . ' MB.';
+        }
+        return $this;
+    }
+
+    public  function is_int(){
+        if(is_numeric($this->value)) return $this;
+         $this->errors[$this->name] = 'Field value ' . $this->name . ' must be integer';
+         return $this;
+    }
+
+
+
+    public function ext($extension)
+    {
+        if ($this->file['error'] != 4 && pathinfo($this->file['name'], PATHINFO_EXTENSION) != $extension && strtoupper(
+                pathinfo($this->file['name'], PATHINFO_EXTENSION)
+            ) != $extension) {
+            $this->errors[$this->name] = 'The file ' . $this->name . ' it is not a ' . $extension . '.';
+        }
+        return $this;
+    }
+
     public function equal($value)
     {
         if ($this->value != $value) {
@@ -125,6 +154,7 @@ class Validator
         }
         return false;
     }
+
 
 
 }

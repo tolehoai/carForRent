@@ -84,10 +84,56 @@
 
     <div class="col-md-5 col-lg-5">
 
-        <form class="needs-validation" method="POST" action="addCarPost" enctype="multipart/form-data">
+        <form class="needs-validation" method="POST" action="addCar" enctype="multipart/form-data">
 
+            <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Name</label>
+                <input type="text" class="form-control" id="name" name="name">
+            </div>
+            <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Brand</label>
+                <input type="text" class="form-control" id="brand" name="brand">
+            </div>
+            <label for="exampleColorInput" class="form-label">Color</label>
+            <input type="color" class="form-control form-control-color" id="exampleColorInput" value="#563d7c"
+                   title="Choose your color" name="color">
+            <div class="row gy-3">
 
-            <div class="row g-3 pt-2">
+                <div class="col-md-6">
+                    <label for="cc-name" class="form-label">Luggage</label>
+                    <input type="text" class="form-control" placeholder="" name="luggage">
+
+                    <div class="invalid-feedback">
+                        Name on card is required
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <label for="cc-number" class="form-label">Doors</label>
+                    <input type="text" class="form-control" placeholder="" name="doors">
+                    <div class="invalid-feedback">
+                        Credit card number is required
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <label for="cc-name" class="form-label">Passenger</label>
+                    <input type="text" class="form-control" placeholder="" name="passenger">
+
+                    <div class="invalid-feedback">
+                        Name on card is required
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <label for="cc-number" class="form-label">Price</label>
+                    <input type="text" class="form-control" placeholder="" name="price">
+                    <div class="invalid-feedback">
+                        Add car
+                    </div>
+                </div>
+
+            </div>
+            <div class="mt-3">
                 <input class="form-control" type="file" id="image" name="image">
             </div>
             <hr class="my-4">

@@ -23,18 +23,19 @@ class Route
         self::$response = $response;
     }
 
-    public static function get($path, $callback)
+    public static function get(string $path, $callback): void
     {
         self::$route['get'][$path] = $callback;
     }
 
-    public static function post($path, $callback)
+    public static function post(string $path, $callback): void
     {
-        self::$route['post'][$path] = $callback;
+        static::$route['post'][$path] = $callback;
     }
 
     public static function resolve()
     {
+        $container = new Container();
         $path = self::$request->getPath();
         $method = self::$request->getMethod();
         $callback = self::$route[$method][$path] ?? false;
@@ -45,7 +46,10 @@ class Route
         if (is_string($callback)) {
             return View::renderView($callback);
         }
-        return call_user_func($callback);
+
+        $currenController = $callback[0];
+        $action = $callback[1];
+        $controller = $container->make($currenController);
+        return $controller->$action();
     }
 }
-

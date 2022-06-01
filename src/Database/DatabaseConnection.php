@@ -11,7 +11,7 @@ class DatabaseConnection
     /*
      * return PDO
      */
-    private static $conn;
+    private static ?PDO $conn = null;
     protected static $dotenv;
 
     /**
@@ -22,19 +22,20 @@ class DatabaseConnection
         $dotenv = Dotenv::createImmutable(__DIR__ . "/../../");
         self::$dotenv = $dotenv->load();
 
-        if (!self::$conn) {
-            $host = $_ENV['HOST'];
-            $username = $_ENV['USERNAME'];
-            $password = $_ENV['PASSWORD'];
-            $database = $_ENV['DATABASE'];
+        if (self::$conn) {
+            return self::$conn;
+        }
+        $host = $_ENV['HOST'];
+        $username = $_ENV['USERNAME'];
+        $password = $_ENV['PASSWORD'];
+        $database = $_ENV['DATABASE'];
 
-            try {
-                self::$conn = new PDO("mysql:host=$host;dbname=$database", $username, $password);
-                self::$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                //                echo "Connected successfully";
-            } catch (PDOException $e) {
-                //                echo "Connection failed: " . $e->getMessage();
-            }
+        try {
+            self::$conn = new PDO("mysql:host=$host;dbname=$database;port=3336", $username, 'Tolehoai123!@#');
+            self::$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+//                            echo "Connected successfully";
+        } catch (PDOException $e) {
+//                            echo "Connection failed: " . $e->getMessage();
         }
         return self::$conn;
     }

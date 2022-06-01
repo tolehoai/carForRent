@@ -2,35 +2,37 @@
 
 namespace Tolehoai\CarForRent\Controller;
 
+use Aws\S3\S3Client;
+use Tolehoai\CarForRent\Boostrap\Application;
 use Tolehoai\CarForRent\Boostrap\Request;
 use Tolehoai\CarForRent\Boostrap\View;
+use Tolehoai\CarForRent\Service\UploadService;
 
 class CarController
 {
     private Request $request;
-    public function __construct(Request $request)
+    private UploadService $uploadService;
+
+    public function __construct(Request $request, UploadService $uploadService)
     {
-        $this->request=$request;
+        $this->request = $request;
+        $this->uploadService = $uploadService;
     }
 
     public function addCar()
     {
-        return View::renderView(
-            'addcar',
-            [
+        if ($this->request->isGet()) {
+            return View::renderView(
+                'addcar',
+                []);
+        }
 
-            ]
-        );
 
     }
 
     public function addCarPost()
     {
-        $hinhsanpham = $_FILES["image"]["name"];
-        $dst = "/var/www/tolehoai/carForRent/uploads/" . $hinhsanpham;
-        //    echo '<script type="text/javascript">alert("' . $dst . '")</script>';
-        move_uploaded_file($_FILES["image"]["tmp_name"], $dst);
-
+        $imageUrl = $this->uploadService->uploadImage($_FILES['image']);
+        echo $imageUrl;
     }
-
 }

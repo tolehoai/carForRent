@@ -2,8 +2,6 @@
 
 namespace Tolehoai\CarForRent\Boostrap;
 
-use http\Client\Curl\User;
-
 class Response
 {
     public array $message = [];

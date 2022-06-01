@@ -15,7 +15,7 @@ class View
         return str_replace('{{content}}', $viewContent, $layoutContent);
     }
 
-    public static function layoutContent(): bool|string
+    public static function layoutContent()
     {
         ob_start();
         include_once __DIR__ . "/../View/layouts/mainLayout.php";
@@ -27,7 +27,7 @@ class View
      * @param $params
      * @return bool|string
      */
-    public static function renderOnlyView(string $view, array $params): bool|string
+    public static function renderOnlyView(string $view, array $params)
     {
         foreach ($params as $key => $value) {
             $$key = $value;

@@ -32,7 +32,7 @@ class UserController extends Controller
         SessionService $sessionService,
         RegisterTransfer $registerTransfer,
         RegisterValidator $registerValidator,
-        RegisterService $registerService,
+        RegisterService $registerService
     ) {
         $this->userService = $userService;
         $this->request = $request;

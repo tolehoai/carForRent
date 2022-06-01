@@ -15,7 +15,7 @@ class SessionRepository
         $this->connection = $databaseService->getConnection();
     }
 
-    public function save(Session $session): bool|Session
+    public function save(Session $session)
     {
         try {
             $query = 'INSERT INTO session(idsession, user_id) VALUES(?, ?)';
@@ -27,12 +27,12 @@ class SessionRepository
                 ]
             );
             return $session;
-        } catch (\Exception) {
+        } catch (\Exception $e) {
             return false;
         }
     }
 
-    public function findById($id): Session|bool
+    public function findById($id)
     {
         $statement = $this->connection->prepare("SELECT idsession, user_id FROM session WHERE idsession = '$id' ");
         $statement->execute();

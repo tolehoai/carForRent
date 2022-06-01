@@ -24,6 +24,7 @@ class CarRepository
         $statement->bindValue('offset',$offset, PDO::PARAM_INT);
         $statement->bindValue('limit',$limit, PDO::PARAM_INT);
         $statement->execute();
+
         $row = $statement->fetchAll();
 
         if (!$row) {
@@ -45,6 +46,7 @@ class CarRepository
             $carTransformer = $this->carTransformer->transform($car);
             array_push($carList, $carTransformer);
         }
+
         return $carList;
     }
 }

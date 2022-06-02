@@ -9,7 +9,7 @@ class CarValidator
     public function validateCarUpload(CarTransfer $car, $file)
     {
         $validator = new Validator();
-        $validator->name('name')->value($car->getName())->min(3)->max(50)->required();
+        $validator->name('name')->value($car->getName())->min(3)->max(255)->required();
         $validator->name('brand')->value($car->getBrand())->min(3)->max(255)->required();
         $validator->name('color')->value($car->getColor())->max(30)->required();
         $validator->name('luggage')->value($car->getLuggage())->is_int()->max(30)->required();

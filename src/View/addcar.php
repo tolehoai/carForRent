@@ -1,7 +1,4 @@
-<?php
-    if(isset($error))
-        var_dump($error);
-?>
+
 <!doctype html>
 <html lang="en">
 <head>

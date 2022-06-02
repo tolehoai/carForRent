@@ -65,4 +65,30 @@ class UserRepository
         );
         return true;
     }
+
+    public function reactionLike(string $type)
+    {
+        $query = 'UPDATE reaction SET `like`=(`like`+1) WHERE `id` = 1';
+        $statement = $this->connection->prepare($query);
+        $statement->execute(
+            []
+        );
+        return (int)$type+1;
+    }
+    public function reactionDislike(string $type)
+    {
+        $query = 'UPDATE reaction SET `dislike`=(`dislike`+1) WHERE `id` = 1';
+        $statement = $this->connection->prepare($query);
+        $statement->execute(
+            []
+        );
+        return (int)$type+1;
+    }
+
+    public function getUserReaction(){
+        $query = 'SELECT * FROM reaction WHERE id = ?';
+        $statement = $this->connection->prepare($query);
+        $statement->execute([1]);
+        return $statement->fetch();
+    }
 }

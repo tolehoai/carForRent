@@ -5,6 +5,7 @@ namespace Tolehoai\CarForRent\Controller;
 use Tolehoai\CarForRent\Boostrap\Controller;
 use Tolehoai\CarForRent\Boostrap\Request;
 use Tolehoai\CarForRent\Boostrap\View;
+use Tolehoai\CarForRent\Repository\UserRepository;
 use Tolehoai\CarForRent\Service\RegisterService;
 use Tolehoai\CarForRent\Service\SessionService;
 use Tolehoai\CarForRent\Service\UserService;
@@ -23,6 +24,7 @@ class UserController extends Controller
     private $registerTransfer;
     private $registerValidator;
     private $registerService;
+    private $userRepository;
 
     public function __construct(
         UserService $userService,
@@ -32,7 +34,8 @@ class UserController extends Controller
         SessionService $sessionService,
         RegisterTransfer $registerTransfer,
         RegisterValidator $registerValidator,
-        RegisterService $registerService
+        RegisterService $registerService,
+        UserRepository $userRepository,
     ) {
         $this->userService = $userService;
         $this->request = $request;
@@ -42,6 +45,7 @@ class UserController extends Controller
         $this->registerTransfer = $registerTransfer;
         $this->registerValidator = $registerValidator;
         $this->registerService = $registerService;
+        $this->userRepository = $userRepository;
     }
 
     public function loginAction()
@@ -117,5 +121,20 @@ class UserController extends Controller
                 'success' => 'Register Sucessfully!',
             ]
         );
+    }
+
+    public function reactionLike(){
+
+        $this->userRepository->reactionLike('like');
+        $row = $this->userRepository->getUserReaction();
+        $like = $row['like'];
+        echo $like;
+    }
+    public function reactionDislike(){
+
+        $this->userRepository->reactionDislike('dislike');
+        $row = $this->userRepository->getUserReaction();
+        $like = $row['dislike'];
+        echo $like;
     }
 }

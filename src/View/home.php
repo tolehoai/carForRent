@@ -38,7 +38,6 @@
         <form class="d-flex" method="post" action="logout">
             <?php
             if (isset($_COOKIE["X-SESSION"])) {
-
                 echo '<form action="logout" method="post">';
                 echo ' <div class="nav-item">';
                 echo ' <a class="nav-link d-inline-block">Hello <b>' . $_COOKIE["X-SESSION-USERNAME"] . '</b> </a>';
@@ -58,6 +57,24 @@
                 <div class="col-lg-7 text-center order-lg-2">
                     <div class="img-wrap-1 mb-5">
                         <img src="https://i.ibb.co/w4fzYpJ/photo-2022-05-30-15-39-16.jpg" alt="Image" class="img-fluid">
+                        <h4>Hello, If you like me, Press Like</h4>
+                        <p>
+                            <button type="button" class="btn btn-success">
+                                <i class="bi bi-telephone-plus"></i>
+                            </button>
+                            <button type="button" class="btn btn-primary" id="like">
+                                Like
+                            </button>
+                            <button type="button" class="btn btn-danger" id="dislike">
+                                Dislike
+                            </button>
+                            <button type="button" class="btn btn-warning">
+                                <i class="bi bi-wallet text-dark"></i>
+                            </button>
+                        </p>
+                        <span><b id="numberLike"><?=$reaction['like']?></b> like</span>
+                        <span><b id="numberDislike"><?=$reaction['dislike']?></b> dislike</span>
+
                     </div>
                 </div>
                 <div class="col-lg-4 ml-auto order-lg-1">
@@ -88,9 +105,10 @@
                     ?>
                     <div class="col-md-6 col-lg-4 mb-4">
 
-                        <div class="listing d-block  align-items-stretch car-card" >
+                        <div class="listing d-block  align-items-stretch car-card">
                             <div class="mr-4 ">
-                                <img src="<?= $car['img'] ?>" alt="Image" class="img-fluid"  style="height: 200px; width: 100%; object-fit: cover">
+                                <img src="<?= $car['img'] ?>" alt="Image" class="img-fluid"
+                                     style="height: 200px; width: 100%; object-fit: cover">
 
                             </div>
                             <div class="listing-contents h-100">
@@ -150,4 +168,20 @@
             </div>
         </div>
     </footer>
+    <script>
+        $("#like").click(function () {
+            $.post("reactionLike",
+                {},
+                function (data, status) {
+                    document.getElementById("numberLike").innerHTML = data;
+                });
+        });
+        $("#dislike").click(function () {
+            $.post("reactionDislike",
+                {},
+                function (data, status) {
+                    document.getElementById("numberDislike").innerHTML = data;
+                });
+        });
+    </script>
 

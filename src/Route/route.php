@@ -53,3 +53,14 @@ Route::post(
     '/addCar',
     [CarController::class, 'addCar']
 );
+
+Route::post(
+    '/reactionLike',
+    [UserController::class, 'reactionLike']
+);
+
+Route::post(
+    '/reactionDislike',
+    [UserController::class, 'reactionDislike']
+);
+

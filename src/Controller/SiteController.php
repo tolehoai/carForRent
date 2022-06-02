@@ -24,7 +24,7 @@ class SiteController extends Controller
 
     public function home()
     {
-        $carList = $this->carRepository->findAll(15,0);
+        $carList = $this->carRepository->findAll(50,0);
        $reaction = $this->userRepository->getUserReaction();
         return View::renderView(
             'home',

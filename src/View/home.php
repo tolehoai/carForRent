@@ -56,24 +56,28 @@
             <div class="row align-items-center">
                 <div class="col-lg-7 text-center order-lg-2">
                     <div class="img-wrap-1 mb-5">
-                        <img src="https://i.ibb.co/w4fzYpJ/photo-2022-05-30-15-39-16.jpg" alt="Image" class="img-fluid">
-                        <h4>Hello, If you like me, Press Like</h4>
-                        <p>
-                            <button type="button" class="btn btn-success">
-                                <i class="bi bi-telephone-plus"></i>
-                            </button>
-                            <button type="button" class="btn btn-primary" id="like">
-                                Like
-                            </button>
-                            <button type="button" class="btn btn-danger" id="dislike">
-                                Dislike
-                            </button>
-                            <button type="button" class="btn btn-warning">
-                                <i class="bi bi-wallet text-dark"></i>
-                            </button>
-                        </p>
-                        <span><b id="numberLike"><?=$reaction['like']?></b> like</span>
-                        <span><b id="numberDislike"><?=$reaction['dislike']?></b> dislike</span>
+                        <br>
+                        <br>
+                        <br>
+<!--                        <img src="https://i.ibb.co/w4fzYpJ/photo-2022-05-30-15-39-16.jpg" alt="Image" class="img-fluid">-->
+                        <img src="https://www.urdesignmag.com/wp-content/uploads/2020/07/get-the-best-rental-cars-at-discount-rates-in-uae-3.jpg" alt="Image" class="img-fluid">
+<!--                        <h4>Hello, If you like me, Press Like</h4>-->
+<!--                        <p>-->
+<!--                            <button type="button" class="btn btn-success">-->
+<!--                                <i class="bi bi-telephone-plus"></i>-->
+<!--                            </button>-->
+<!--                            <button type="button" class="btn btn-primary" id="like">-->
+<!--                                Like-->
+<!--                            </button>-->
+<!--                            <button type="button" class="btn btn-danger" id="dislike">-->
+<!--                                Dislike-->
+<!--                            </button>-->
+<!--                            <button type="button" class="btn btn-warning">-->
+<!--                                <i class="bi bi-wallet text-dark"></i>-->
+<!--                            </button>-->
+<!--                        </p>-->
+<!--                        <span><b id="numberLike">--><?//= $reaction['like'] ?><!--</b> like</span>-->
+<!--                        <span><b id="numberDislike">--><?//= $reaction['dislike'] ?><!--</b> dislike</span>-->
 
                     </div>
                 </div>
@@ -94,7 +98,7 @@
     <div class="site-section bg-light">
         <div class="container">
             <br>
-            <h2 class="section-heading text-center"><strong>Car Listings</strong></h2>
+            <h2 class="section-heading text-center"><strong>Vehicles List</strong></h2>
             <br>
 
 
@@ -136,8 +140,8 @@
                                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos eos at eum,
                                         voluptatem
                                         quibusdam.</p>
-                                    <p><a href="#" class="btn btn-primary btn-sm">Rent Now</a></p>
                                 </div>
+                                <p><a href="#" class="btn btn-primary btn-sm">Rent Now</a></p>
                             </div>
 
                         </div>

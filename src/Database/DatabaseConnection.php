@@ -5,6 +5,7 @@ namespace Tolehoai\CarForRent\Database;
 use Dotenv\Dotenv;
 use PDO;
 use PDOException;
+use Tolehoai\CarForRent\Boostrap\Application;
 
 class DatabaseConnection
 {

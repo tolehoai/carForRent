@@ -41,17 +41,22 @@ class UserRepository
         return $user;
     }
 
-    public function save(RegisterTransfer $user): RegisterTransfer
+    public function save(RegisterTransfer $user): array
     {
-        $query = 'INSERT INTO user(username,password) VALUES (?, ?)';
-        $statement = $this->connection->prepare($query);
-        $statement->execute(
-            [
-                $user->getUsername(),
-                $user->getPassword(),
-            ]
-        );
-        return $user;
+        try {
+            $query = 'INSERT INTO user(username,password) VALUES (?, ?)';
+            $statement = $this->connection->prepare($query);
+            $statement->execute(
+                [
+                    $user->getUsername(),
+                    $user->getHashPassword(),
+                ]
+            );
+            return ["data" => $user];
+        } catch (PDOException $e) {
+            return ["error" => "Error when query"];
+        }
+
     }
 
     public function deleteById(string $userId): bool
@@ -66,29 +71,5 @@ class UserRepository
         return true;
     }
 
-    public function reactionLike(string $type)
-    {
-        $query = 'UPDATE reaction SET `like`=(`like`+1) WHERE `id` = 1';
-        $statement = $this->connection->prepare($query);
-        $statement->execute(
-            []
-        );
-        return (int)$type+1;
-    }
-    public function reactionDislike(string $type)
-    {
-        $query = 'UPDATE reaction SET `dislike`=(`dislike`+1) WHERE `id` = 1';
-        $statement = $this->connection->prepare($query);
-        $statement->execute(
-            []
-        );
-        return (int)$type+1;
-    }
 
-    public function getUserReaction(){
-        $query = 'SELECT * FROM reaction WHERE id = ?';
-        $statement = $this->connection->prepare($query);
-        $statement->execute([1]);
-        return $statement->fetch();
-    }
 }

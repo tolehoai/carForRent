@@ -2,11 +2,31 @@
 
 namespace Tolehoai\CarForRent\Transfer;
 
+use Tolehoai\CarForRent\CustomTrait\PasswordTrait;
+
 class RegisterTransfer
 {
+    use PasswordTrait;
     private ?string $username;
     private ?string $password;
     private ?string $confirmPassword;
+    private ?string $hashPassword;
+
+    /**
+     * @return string|null
+     */
+    public function getHashPassword(): ?string
+    {
+        return $this->hashPassword;
+    }
+
+    /**
+     * @param string|null $hashPassword
+     */
+    public function setHashPassword(?string $password): void
+    {
+        $this->hashPassword = $this->hashPassword($password);
+    }
 
     /**
      * @return string|null
@@ -62,9 +82,10 @@ class RegisterTransfer
      */
     public function fromArray(array $params)
     {
-        $this->username = $params['username'] ?? null;
-        $this->password = $params['password'] ?? null;
-        $this->confirmPassword = $params['confirmPassword'] ?? null;
+        $this->setUsername($params['username'] ?? null);
+        $this->setPassword( $params['password'] ?? null);
+        $this->setConfirmPassword($params['confirmPassword'] ?? null);
+        $this->setHashPassword($this->getPassword());
         return $this;
     }
 

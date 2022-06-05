@@ -86,12 +86,12 @@
     <div class="col-md-5 col-lg-5">
         <?php
             if(isset($failed)){
-                echo ' <div class="alert alert-danger" role="alert">'.$failed.'</div>';
+                echo ' <div class="alert alert-danger" role="alert">'.$message.'</div>';
             }
         ?>
         <?php
         if(isset($success)){
-            echo ' <div class="alert alert-success" role="alert">'.$success.'</div>';
+            echo ' <div class="alert alert-success" role="alert">'.$message.'</div>';
         }
         ?>
 
@@ -102,8 +102,8 @@
                 <label for="exampleFormControlInput1" class="form-label">Name</label>
                 <input type="text" class="form-control" id="name" name="name">
                 <?php
-                    if(isset($error['name'])){
-                        echo ' <div style="color:red; font-style: italic">'.$error['name'].'</div>';
+                    if(isset($formError['name'])){
+                        echo ' <div style="color:red; font-style: italic">'.$formError['name'].'</div>';
                     }
                 ?>
 
@@ -112,8 +112,8 @@
                 <label for="exampleFormControlInput1" class="form-label">Brand</label>
                 <input type="text" class="form-control" id="brand" name="brand">
                 <?php
-                if(isset($error['brand'])){
-                    echo ' <div style="color:red; font-style: italic">'.$error['brand'].'</div>';
+                if(isset($formError['brand'])){
+                    echo ' <div style="color:red; font-style: italic">'.$formError['brand'].'</div>';
                 }
                 ?>
             </div>
@@ -126,8 +126,8 @@
                     <label for="cc-name" class="form-label">Luggage</label>
                     <input type="text" class="form-control" placeholder="" name="luggage">
                     <?php
-                    if(isset($error['luggage'])){
-                        echo ' <div style="color:red; font-style: italic">'.$error['luggage'].'</div>';
+                    if(isset($formError['luggage'])){
+                        echo ' <div style="color:red; font-style: italic">'.$formError['luggage'].'</div>';
                     }
                     ?>
                 </div>
@@ -136,8 +136,8 @@
                     <label for="cc-number" class="form-label">Doors</label>
                     <input type="text" class="form-control" placeholder="" name="doors">
                     <?php
-                    if(isset($error['doors'])){
-                        echo ' <div style="color:red; font-style: italic">'.$error['doors'].'</div>';
+                    if(isset($formError['doors'])){
+                        echo ' <div style="color:red; font-style: italic">'.$formError['doors'].'</div>';
                     }
                     ?>
                 </div>
@@ -145,8 +145,8 @@
                     <label for="cc-name" class="form-label">Passenger</label>
                     <input type="text" class="form-control" placeholder="" name="passenger">
                     <?php
-                    if(isset($error['name'])){
-                        echo ' <div style="color:red; font-style: italic">'.$error['passenger'].'</div>';
+                    if(isset($formError['name'])){
+                        echo ' <div style="color:red; font-style: italic">'.$formError['passenger'].'</div>';
                     }
                     ?>
                 </div>
@@ -155,8 +155,8 @@
                     <label for="cc-number" class="form-label">Price</label>
                     <input type="text" class="form-control" placeholder="" name="price">
                     <?php
-                    if(isset($error['price'])){
-                        echo ' <div style="color:red; font-style: italic">'.$error['price'].'</div>';
+                    if(isset($formError['price'])){
+                        echo ' <div style="color:red; font-style: italic">'.$formError['price'].'</div>';
                     }
                     ?>
                 </div>
@@ -165,8 +165,8 @@
             <div class="mt-3">
                 <input class="form-control" type="file" id="image" name="image">
                 <?php
-                if(isset($error['price'])){
-                    echo ' <div style="color:red; font-style: italic">'.$error['image'].'</div>';
+                if(isset($formError['price'])){
+                    echo ' <div style="color:red; font-style: italic">'.$formError['image'].'</div>';
                 }
                 ?>
             </div>

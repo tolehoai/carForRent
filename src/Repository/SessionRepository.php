@@ -34,8 +34,8 @@ class SessionRepository
 
     public function findById($id)
     {
-        $statement = $this->connection->prepare("SELECT idsession, user_id FROM session WHERE idsession = '$id' ");
-        $statement->execute();
+        $statement = $this->connection->prepare('SELECT idsession, user_id FROM session WHERE idsession = ? ');
+        $statement->execute([$id]);
 
         try {
             $session = new Session();

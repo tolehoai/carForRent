@@ -19,6 +19,7 @@ class SessionServiceTest extends TestCase
      */
     public function testCreate()
     {
+        //da xoa random service
         $randomService = $this->getMockBuilder(RandomService::class)->disableOriginalConstructor()->getMock();
         $sessionId = $randomService->method('getUniqueId')->willReturn('123');
 

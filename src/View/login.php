@@ -18,7 +18,7 @@
     <?php
     if (isset($error)) {
         echo "<div class='alert alert-danger' role='alert'>";
-        echo $error;
+        echo $message;
         echo "</div>";
     }
     ?>

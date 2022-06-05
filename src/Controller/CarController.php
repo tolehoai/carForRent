@@ -18,12 +18,13 @@ class CarController
     private CarValidator $carValidator;
 
     public function __construct(
-        Request $request,
+        Request       $request,
         UploadService $uploadService,
-        CarTransfer $carTransfer,
+        CarTransfer   $carTransfer,
         CarRepository $carRepository,
-        CarValidator $carValidator
-    ) {
+        CarValidator  $carValidator
+    )
+    {
         $this->request = $request;
         $this->uploadService = $uploadService;
         $this->carTransfer = $carTransfer;
@@ -40,32 +41,31 @@ class CarController
             );
         }
         $this->carTransfer->fromArray($this->request->getBody());
-        $isUploadCarValid = $this->carValidator->validateCarUpload($this->carTransfer,$_FILES['image']);
+        $isUploadCarValid = $this->carValidator->validateCarUpload($this->carTransfer, $_FILES['image']);
 
-        if(is_array($isUploadCarValid)){
+        if (!empty($isUploadCarValid)) {
             return View::renderView(
                 'addcar',
-                ['error'=>$isUploadCarValid]
+                ["formError" => $isUploadCarValid]
             );
         }
-        $imageUrl = $this->uploadService->uploadImage($_FILES['image']);
-        $this->carTransfer->setImg($imageUrl);
+
+        $this->uploadService->uploadImage($_FILES['image']);
+
         $isAddCarSuccess = $this->carRepository->save($this->carTransfer);
-        if( !$isAddCarSuccess){
-            return View::renderView(
-                'addcar',
-                [
-                    'failed' => 'Add car to database failed',
-                ]
-            );
+        $message = [];
+        if (!$isAddCarSuccess) {
+            $message = [
+                'failed' => true,
+                'message' => 'Add car to database failed'
+            ];
+            return View::renderView('addcar', $message);
         }
-        return View::renderView(
-            'addcar',
-            [
-                'success' => 'Add car Sucessfully!',
-            ]
-        );
+        $message = [
+            'success' => true,
+            'message' => 'Add car Sucessfully!'
+        ];
+        return View::renderView('addcar', $message);
     }
-
 
 }

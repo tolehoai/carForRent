@@ -2,6 +2,7 @@
 
 namespace Tolehoai\CarForRent\Service;
 
+use Tolehoai\CarForRent\CustomTrait\RandomGenerateTrait;
 use Tolehoai\CarForRent\Model\Session;
 use Tolehoai\CarForRent\Repository\SessionRepository;
 use Tolehoai\CarForRent\Repository\UserRepository;
@@ -14,25 +15,22 @@ class SessionService
     private $sessionRepository;
     private $userRepository;
     private $cookieService;
-    private $randomService;
-
+    use RandomGenerateTrait;
 
     public function __construct(
         SessionRepository $sessionRepository,
         UserRepository $userRepository,
-        CookieService $cookieService,
-        RandomService $randomService
+        CookieService $cookieService
     ) {
         $this->sessionRepository = $sessionRepository;
         $this->userRepository = $userRepository;
         $this->cookieService = $cookieService;
-        $this->randomService = $randomService;
     }
 
     public function create($userId)
     {
         $session = new Session();
-        $session->setId($this->randomService->getUniqueId());
+        $session->setId($this->generateUUID());
         $session->setUserId($userId);
         $this->sessionRepository->save($session);
         $this->cookieService->setCookie($session);

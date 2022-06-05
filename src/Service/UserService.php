@@ -14,16 +14,17 @@ class UserService
 
 
     public function __construct(
-        UserRepository $userRepository,
-        SessionService $sessionService,
+        UserRepository  $userRepository,
+        SessionService  $sessionService,
         UserTransformer $userTransformer
-    ) {
+    )
+    {
         $this->userRepository = $userRepository;
         $this->sessionService = $sessionService;
         $this->userTransformer = $userTransformer;
     }
 
-    public function login(UserTransfer $userInput)
+    public function login(UserTransfer $userInput): ?array
     {
         $existUser = $this->userRepository->findByUsername($userInput->getUsername());
 
@@ -32,6 +33,6 @@ class UserService
             $userTransformer = $this->userTransformer->transform($existUser);
             return $userTransformer;
         }
-        return false;
+        return null;
     }
 }

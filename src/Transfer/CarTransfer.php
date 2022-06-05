@@ -9,17 +9,17 @@ class CarTransfer
     private string $brand;
     private string $color;
     private string $img;
-    private int|string $luggage;
-    private int|string $doors;
-    private int|string $passenger;
-    private int|string $price;
+    private ?int $luggage = null;
+    private ?int $doors = null;
+    private ?int $passenger = null;
+    private ?int $price = null;
 
     /**
      * @return int
      */
     public function getId(): int
     {
-        return $this->id??0;
+        return $this->id ?? 0;
     }
 
     /**
@@ -27,7 +27,7 @@ class CarTransfer
      */
     public function setId(int $id): void
     {
-        $this->id = $id??0;
+        $this->id = $id ?? 0;
     }
 
     /**
@@ -97,7 +97,7 @@ class CarTransfer
     /**
      * @return int
      */
-    public function getLuggage(): int|string
+    public function getLuggage(): ?int
     {
         return $this->luggage;
     }
@@ -105,7 +105,7 @@ class CarTransfer
     /**
      * @param int $luggage
      */
-    public function setLuggage(int|string $luggage): void
+    public function setLuggage(?int $luggage): void
     {
         $this->luggage = $luggage;
     }
@@ -113,7 +113,7 @@ class CarTransfer
     /**
      * @return int
      */
-    public function getDoors(): int|string
+    public function getDoors(): ?int
     {
         return $this->doors;
     }
@@ -121,7 +121,7 @@ class CarTransfer
     /**
      * @param int $doors
      */
-    public function setDoors(int|string $doors): void
+    public function setDoors(?int $doors): void
     {
         $this->doors = $doors;
     }
@@ -129,7 +129,7 @@ class CarTransfer
     /**
      * @return int
      */
-    public function getPassenger(): int|string
+    public function getPassenger(): ?int
     {
         return $this->passenger;
     }
@@ -137,7 +137,7 @@ class CarTransfer
     /**
      * @param int $passenger
      */
-    public function setPassenger(int|string $passenger): void
+    public function setPassenger(?int $passenger): void
     {
         $this->passenger = $passenger;
     }
@@ -145,7 +145,7 @@ class CarTransfer
     /**
      * @return int
      */
-    public function getPrice(): int|string
+    public function getPrice(): ?int
     {
         return $this->price;
     }
@@ -153,7 +153,7 @@ class CarTransfer
     /**
      * @param int $price
      */
-    public function setPrice(int|string $price): void
+    public function setPrice(?int $price): void
     {
         $this->price = $price;
     }
@@ -164,10 +164,10 @@ class CarTransfer
         $this->setName($params['name'] ?? null);
         $this->setBrand($params['brand'] ?? null);
         $this->setColor($params['color'] ?? null);
-        $this->setLuggage($params['luggage'] ?? null);
-        $this->setDoors($params['doors'] ?? null);
-        $this->setPassenger($params['passenger'] ?? null);
-        $this->setPrice($params['price'] ?? null);
+        $this->setLuggage(is_numeric($params['luggage']) ? (int)$params['luggage'] : null);
+        $this->setDoors(is_numeric($params['doors']) ? (int)$params['doors'] : null);
+        $this->setPassenger(is_numeric($params['passenger']) ? (int)$params['passenger'] : null);
+        $this->setPrice(is_numeric($params['price']) ? (int)$params['price'] : null);
         return $this;
     }
 

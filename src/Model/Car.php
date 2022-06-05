@@ -9,6 +9,34 @@ class Car
     private int $luggage;
     private int $doors;
     private int $passenger;
+    private string $brand;
+    private string $color;
+    private string $name;
+
+    /**
+     * @param int $id
+     * @param string $img
+     * @param int $luggage
+     * @param int $doors
+     * @param int $passenger
+     * @param float $price
+     * @param string $brand
+     * @param string $color
+     * @param string $name
+     */
+    public function __construct(int $id, string $img, int $luggage, int $doors, int $passenger, float $price, string $brand, string $color, string $name)
+    {
+        $this->id = $id;
+        $this->img = $img;
+        $this->luggage = $luggage;
+        $this->doors = $doors;
+        $this->passenger = $passenger;
+        $this->price = $price;
+        $this->brand = $brand;
+        $this->color = $color;
+        $this->name = $name;
+    }
+
 
     /**
      * @return int
@@ -154,7 +182,5 @@ class Car
     {
         $this->name = $name;
     }
-    private string $brand;
-    private string $color;
-    private string $name;
+
 }

@@ -2,7 +2,7 @@
 
 namespace Tolehoai\CarForRent\Transfer;
 
-use Tolehoai\CarForRent\CustomTrait\PasswordTrait;
+use Tolehoai\CarForRent\Traits\PasswordTrait;
 
 class RegisterTransfer
 {

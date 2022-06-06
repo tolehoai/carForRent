@@ -8,7 +8,7 @@ use Tolehoai\CarForRent\Boostrap\View;
 use Tolehoai\CarForRent\Repository\UserRepository;
 use Tolehoai\CarForRent\Service\RegisterService;
 use Tolehoai\CarForRent\Service\SessionService;
-use Tolehoai\CarForRent\Service\UserService;
+use Tolehoai\CarForRent\Service\LoginService;
 use Tolehoai\CarForRent\Transfer\RegisterTransfer;
 use Tolehoai\CarForRent\Transfer\UserTransfer;
 use Tolehoai\CarForRent\Validator\RegisterValidator;
@@ -26,9 +26,11 @@ class RegisterController extends BaseController
         RegisterTransfer  $registerTransfer,
         RegisterValidator $registerValidator,
         RegisterService   $registerService,
-        UserRepository    $userRepository
+        UserRepository    $userRepository,
+        Request $request
     )
     {
+        parent::__construct($request);
         $this->registerTransfer = $registerTransfer;
         $this->registerValidator = $registerValidator;
         $this->registerService = $registerService;

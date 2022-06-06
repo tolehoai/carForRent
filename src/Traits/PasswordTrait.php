@@ -1,6 +1,6 @@
 <?php
 
-namespace Tolehoai\CarForRent\CustomTrait;
+namespace Tolehoai\CarForRent\Traits;
 
 trait PasswordTrait
 {

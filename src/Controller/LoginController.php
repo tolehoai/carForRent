@@ -6,40 +6,40 @@ use Tolehoai\CarForRent\Boostrap\Controller;
 use Tolehoai\CarForRent\Boostrap\Request;
 use Tolehoai\CarForRent\Boostrap\View;
 use Tolehoai\CarForRent\Repository\UserRepository;
-use Tolehoai\CarForRent\Service\RegisterService;
 use Tolehoai\CarForRent\Service\SessionService;
-use Tolehoai\CarForRent\Service\UserService;
-use Tolehoai\CarForRent\Transfer\RegisterTransfer;
+use Tolehoai\CarForRent\Service\LoginService;
 use Tolehoai\CarForRent\Transfer\UserTransfer;
-use Tolehoai\CarForRent\Validator\RegisterValidator;
 use Tolehoai\CarForRent\Validator\UserValidator;
 
 class LoginController extends BaseController
 {
-    private UserService $userService;
+    private LoginService $userService;
     private SessionService $sessionService;
     private UserValidator $userValidator;
     private UserTransfer $userTransfer;
 
+
     private UserRepository $userRepository;
 
     public function __construct(
-        UserService    $userService,
-        UserTransfer   $userTransfer,
-        UserValidator  $userValidator,
+        LoginService $userService,
+        UserTransfer $userTransfer,
+        UserValidator $userValidator,
         SessionService $sessionService,
-        UserRepository $userRepository
-
-    )
-    {
+        UserRepository $userRepository,
+        Request $request
+    ) {
+        parent::__construct($request);
         $this->userService = $userService;
         $this->userValidator = $userValidator;
         $this->sessionService = $sessionService;
         $this->userTransfer = $userTransfer;
         $this->userRepository = $userRepository;
     }
+
     public function loginAction()
     {
+
         if ($this->request->isGet()) {
             return $this->render('login');
         }
@@ -47,20 +47,25 @@ class LoginController extends BaseController
         $isLoginFormVaild = $this->userValidator->validateUserLogin($this->userTransfer);
         if (!empty($isLoginFormVaild)) {
             $message = [
-                'title' => 'Login', 'username' => $this->userTransfer->getUsername(),
-                'password' => $this->userTransfer->getPassword(), 'error' => true,
+                'title' => 'Login',
+                'username' => $this->userTransfer->getUsername(),
+                'password' => $this->userTransfer->getPassword(),
+                'error' => true,
                 'message' => $isLoginFormVaild['message']
             ];
             return View::renderView('login', $message);
         }
         $isLoginSuccess = $this->userService->login($this->userTransfer);
-        if ($isLoginSuccess) {
+        if (!empty($isLoginSuccess)) {
             return View::redirect("/");
         }
         $errorMessage = 'The username or password is invalid!';
         $message = [
-            'title' => 'Login', 'username' => $this->userTransfer->getUsername(),
-            'password' => $this->userTransfer->getPassword(), 'error' => $errorMessage,
+            'title' => 'Login',
+            'username' => $this->userTransfer->getUsername(),
+            'password' => $this->userTransfer->getPassword(),
+            'error' => true,
+            'message'=>$errorMessage
         ];
         return View::renderView('login', $message);
     }
@@ -73,17 +78,17 @@ class LoginController extends BaseController
     }
 
     /**
-     * @return UserService
+     * @return LoginService
      */
-    public function getUserService(): UserService
+    public function getUserService(): LoginService
     {
         return $this->userService;
     }
 
     /**
-     * @param UserService $userService
+     * @param LoginService $userService
      */
-    public function setUserService(UserService $userService): void
+    public function setUserService(LoginService $userService): void
     {
         $this->userService = $userService;
     }
@@ -151,7 +156,6 @@ class LoginController extends BaseController
     {
         $this->userRepository = $userRepository;
     }
-
 
 
 }

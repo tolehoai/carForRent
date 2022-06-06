@@ -41,7 +41,7 @@ class UserRepository
         return $user;
     }
 
-    public function save(RegisterTransfer $user): array
+    public function save(RegisterTransfer $user)
     {
         try {
             $query = 'INSERT INTO user(username,password) VALUES (?, ?)';
@@ -52,7 +52,7 @@ class UserRepository
                     $user->getHashPassword(),
                 ]
             );
-            return ["data" => $user];
+            return $user;
         } catch (PDOException $e) {
             return ["error" => "Error when query"];
         }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Test\Tolehoai\CarForRent\UserTransfer;
+namespace Test\Tolehoai\CarForRent\Transfer;
 
 use PHPUnit\Framework\TestCase;
 use Tolehoai\CarForRent\Transfer\UserTransfer;

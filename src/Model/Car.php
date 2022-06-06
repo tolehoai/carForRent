@@ -24,19 +24,6 @@ class Car
      * @param string $color
      * @param string $name
      */
-    public function __construct(int $id, string $img, int $luggage, int $doors, int $passenger, float $price, string $brand, string $color, string $name)
-    {
-        $this->id = $id;
-        $this->img = $img;
-        $this->luggage = $luggage;
-        $this->doors = $doors;
-        $this->passenger = $passenger;
-        $this->price = $price;
-        $this->brand = $brand;
-        $this->color = $color;
-        $this->name = $name;
-    }
-
 
     /**
      * @return int

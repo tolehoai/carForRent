@@ -2,7 +2,8 @@
 
 namespace Tolehoai\CarForRent\Service;
 
-use Tolehoai\CarForRent\CustomTrait\RandomGenerateTrait;
+use PDOException;
+use Tolehoai\CarForRent\Traits\RandomGenerateTrait;
 use Tolehoai\CarForRent\Model\Session;
 use Tolehoai\CarForRent\Repository\SessionRepository;
 use Tolehoai\CarForRent\Repository\UserRepository;
@@ -29,12 +30,16 @@ class SessionService
 
     public function create($userId)
     {
-        $session = new Session();
-        $session->setId($this->generateUUID());
-        $session->setUserId($userId);
-        $this->sessionRepository->save($session);
-        $this->cookieService->setCookie($session);
-        return $session;
+        try {
+            $session = new Session();
+            $session->setId($this->generateUUID());
+            $session->setUserId($userId);
+            $result = $this->sessionRepository->save($session);
+            $this->cookieService->setCookie($session);
+            return $result;
+        }catch (PDOException $e){
+            return [];
+        }
     }
 
 

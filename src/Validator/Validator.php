@@ -58,15 +58,7 @@ class Validator
         }
         return $this;
     }
-
-    public function customPattern($pattern)
-    {
-        $regex = '/^(' . $pattern . ')$/u';
-        if ($this->value != '' && !preg_match($regex, $this->value)) {
-            $this->errors[$this->name] = 'Field format ' . $this->name . ' invailid.';
-        }
-        return $this;
-    }
+    
 
     public function required()
     {
@@ -104,10 +96,8 @@ class Validator
         return $this;
     }
 
-    public function purify($string)
-    {
-        return htmlspecialchars($string, ENT_QUOTES, 'UTF-8');
-    }
+    
+    
     public function checkSize(int $size)
     {
         if (!empty($this->errors[$this->name])) {

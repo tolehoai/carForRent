@@ -33,7 +33,7 @@ class UserRepositoryTest extends TestCase
         $databaseService = new DatabaseService();
         $userRepository = new UserRepository($databaseService);
         $user = new User();
-        $user->setId(2);
+        $user->setId(999);
         $user->setUsername('tolehoai2');
         $user->setPassword('$2a$12$cgoAjnZqrRFofINlgpI26uqDyem9eLkbEg2GX3IgCtfZybqErIuM6');
         $result = $userRepository->save($user);
@@ -41,14 +41,14 @@ class UserRepositoryTest extends TestCase
         $this->assertEquals($expected, $result);
     }
 
-    public function testDeleteById()
-    {
-        $databaseService = new DatabaseService();
-        $userRepository = new UserRepository($databaseService);
-        $user = new User();
-        $user->setId(2);
-        $result = $userRepository->deleteById($user->getId());
-        $expected = true;
-        $this->assertEquals($expected, $result);
-    }
+//    public function testDeleteById()
+//    {
+//        $databaseService = new DatabaseService();
+//        $userRepository = new UserRepository($databaseService);
+//        $user = new User();
+//        $user->setId(2);
+//        $result = $userRepository->deleteById($user->getId());
+//        $expected = true;
+//        $this->assertEquals($expected, $result);
+//    }
 }

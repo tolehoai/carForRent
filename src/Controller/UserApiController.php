@@ -7,7 +7,7 @@ use Tolehoai\CarForRent\Boostrap\Controller;
 use Tolehoai\CarForRent\Boostrap\Request;
 use Tolehoai\CarForRent\Boostrap\Response;
 use Tolehoai\CarForRent\Service\TokenService;
-use Tolehoai\CarForRent\Service\UserService;
+use Tolehoai\CarForRent\Service\LoginService;
 use Tolehoai\CarForRent\Transfer\UserTransfer;
 use Tolehoai\CarForRent\Transformer\UserTransformer;
 use Tolehoai\CarForRent\Validator\UserValidator;
@@ -26,7 +26,7 @@ class UserApiController extends Controller
         Request $request,
         UserTransfer $userTransfer,
         UserValidator $userValidator,
-        UserService $userService,
+        LoginService $userService,
         Response $response,
         UserTransformer $userTransformer,
         TokenService $tokenService,

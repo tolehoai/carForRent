@@ -4,7 +4,6 @@ namespace Test\Tolehoai\CarForRent\Service;
 
 use PHPUnit\Framework\TestCase;
 use Tolehoai\CarForRent\Model\Session;
-use Tolehoai\CarForRent\Model\User;
 use Tolehoai\CarForRent\Repository\SessionRepository;
 use Tolehoai\CarForRent\Repository\UserRepository;
 use Tolehoai\CarForRent\Service\CookieService;
@@ -19,37 +18,18 @@ class SessionServiceTest extends TestCase
      */
     public function testCreate()
     {
-        //da xoa random service
-        $randomService = $this->getMockBuilder(RandomService::class)->disableOriginalConstructor()->getMock();
-        $sessionId = $randomService->method('getUniqueId')->willReturn('123');
+        $userId = 1;
+        $databaseService = new DatabaseService();
+        $sessionRepository = new SessionRepository($databaseService);
+        $userRepository = $this->getMockBuilder(UserRepository::class)->disableOriginalConstructor()->getMock();
+        $cookieService = $this->getMockBuilder(CookieService::class)->disableOriginalConstructor()->getMock();
+        $sessionService = new SessionService($sessionRepository, $userRepository, $cookieService);
+        $result = $sessionService->create($userId);
+        $session = $sessionRepository->findById($result->getId());
 
-        $session = new Session();
-        $session->setId($sessionId);
-        $session->setUserId('tolehoai');
-
-        $sessionRepositoryMock = $this->getMockBuilder(SessionRepository::class)->disableOriginalConstructor()->getMock(
-        );
-        $userRepositoryMock = $this->getMockBuilder(UserRepository::class)->disableOriginalConstructor()->getMock();
-        $sessionRepositoryMock->method('save')->willReturn($session);
-
-
-        $cookieServiceMock = $this->getMockBuilder(CookieService::class)->disableOriginalConstructor()->getMock();
-
-        $sessionService = new SessionService(
-            $sessionRepositoryMock,
-            $userRepositoryMock,
-            $cookieServiceMock,
-            $randomService
-        );
-
-        $result = $sessionService->create($session->getUserId());
-
-        $expected = new Session();
-        $expected->setId('123');
-        $expected->setUserId('tolehoai');
-
-        $this->assertEquals($expected, $result);
+        $this->assertEquals($result, $session);
     }
+
 
 
     /**
@@ -58,18 +38,15 @@ class SessionServiceTest extends TestCase
      */
     public function testDestroy()
     {
-        $sessionRepositoryMock = $this->getMockBuilder(SessionRepository::class)->disableOriginalConstructor()->getMock(
-        );
+        $sessionRepositoryMock = $this->getMockBuilder(SessionRepository::class)->disableOriginalConstructor()->getMock();
         $sessionRepositoryMock->method('deleteById')->willReturn(true);
 
         $userRepositoryMock = $this->getMockBuilder(UserRepository::class)->disableOriginalConstructor()->getMock();
-        $randomService = $this->getMockBuilder(RandomService::class)->disableOriginalConstructor()->getMock();
         $cookieService = new CookieService();
         $sessionService = new SessionService(
             $sessionRepositoryMock,
             $userRepositoryMock,
             $cookieService,
-            $randomService
         );
         $result = $sessionService->destroy();
 
@@ -83,13 +60,11 @@ class SessionServiceTest extends TestCase
         $sessionRepositoryMock->method('deleteById')->willReturn(false);
 
         $userRepositoryMock = $this->getMockBuilder(UserRepository::class)->disableOriginalConstructor()->getMock();
-        $randomService = $this->getMockBuilder(RandomService::class)->disableOriginalConstructor()->getMock();
         $cookieService = new CookieService();
         $sessionService = new SessionService(
             $sessionRepositoryMock,
             $userRepositoryMock,
             $cookieService,
-            $randomService
         );
         $result = $sessionService->destroy();
 

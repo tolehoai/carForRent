@@ -8,6 +8,7 @@ class Application
      * @var string
      */
     public static string $ROOT_DIR;
+    public static Application $application;
     /**
      * @var Route
      */
@@ -16,15 +17,18 @@ class Application
      * @var Request
      */
     public Request $request;
-
     /**
      * @param $rootPath
      */
+    public Response $response;
+
     public function __construct($rootPath)
     {
         self::$ROOT_DIR = $rootPath;
+        self::$application = $this;
         $this->request = new Request();
-        $this->route = new Route($this->request);
+        $this->response = new Response();
+        $this->route = new Route($this->request, $this->response);
     }
 
     /**
@@ -32,6 +36,6 @@ class Application
      */
     public function run()
     {
-        $this->route->resolve();
+        echo Route::resolve();
     }
 }

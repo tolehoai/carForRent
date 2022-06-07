@@ -7,6 +7,8 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-12 text-center">
+                <img class="mb-4 mt-4" src="https://cdn-icons-png.flaticon.com/512/25/25231.png?w=360" alt="" width="72"
+                     height="72">
                 <span class="display-1 d-block">404</span>
                 <div class="mb-4 lead">The page you are looking for was not found.</div>
                 <a href="http://www.tolehoai.local/" class="btn btn-link">Back to Home</a>
@@ -14,3 +16,4 @@
         </div>
     </div>
 </div>
+

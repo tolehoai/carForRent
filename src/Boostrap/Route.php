@@ -7,67 +7,45 @@ class Route
     /**
      * @var Request
      */
-    public Request $request;
-    /**
-     * @var array
-     */
-    protected array $route = [];
-
+    public static Request $request;
     /**
      * @param Request $request
      */
-    public function __construct(Request $request)
+    public static Response $response;
+    /**
+     * @var array
+     */
+    protected static array $route = [];
+
+    public function __construct(Request $request, Response $response)
     {
-        $this->request = $request;
+        self::$request = $request;
+        self::$response = $response;
     }
 
-    /**
-     * @param $path
-     * @param $callback
-     * @return void
-     */
-    public function get($path, $callback)
+    public static function get($path, $callback)
     {
-        $this->route['get'][$path] = $callback;
+        self::$route['get'][$path] = $callback;
     }
 
-    /**
-     * @return void
-     */
-    public function resolve()
+    public static function post($path, $callback)
     {
-        $path = $this->request->getPath();
-        $method = $this->request->getMethod();
-        $callback = $this->route[$method][$path] ?? false;
+        self::$route['post'][$path] = $callback;
+    }
+
+    public static function resolve()
+    {
+        $path = self::$request->getPath();
+        $method = self::$request->getMethod();
+        $callback = self::$route[$method][$path] ?? false;
         if ($callback === false) {
-            $callback = $this->route['get']['/404'];
+            self::$response->setStatusCode(404);
+            return View::renderView('404');
         }
-//        if (is_string($callback)) {
-//            return $this->renderView($callback);
-//        }
-        return $this->renderView($callback);
-//        return call_user_func($callback);
+        if (is_string($callback)) {
+            return View::renderView($callback);
+        }
+        return call_user_func($callback);
     }
-
-    /**
-     * @param string $view
-     * @return void
-     */
-    private function renderView(string $view)
-    {
-        $layoutContent = $this->layoutContent();
-        include_once Application::$ROOT_DIR . "/src/View/$view.php";
-    }
-
-    /**
-     * @return false|string
-     */
-    private function layoutContent()
-    {
-        ob_start();
-        include_once Application::$ROOT_DIR . "/src/View/layouts/home.php";
-        return ob_get_clean();
-    }
-
-
 }
+

@@ -1,23 +1,17 @@
 <?php
 
-
 use Tolehoai\CarForRent\Boostrap\Application;
-
-require '../vendor/autoload.php';
+use Tolehoai\CarForRent\Controller\SiteController;
+use Tolehoai\CarForRent\Database\DatabaseConnection;
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
 
+require '../vendor/autoload.php';
+
+$conn = DatabaseConnection::getConnection();
+
 $app = new Application(dirname(__DIR__));
 
-
-$app->route->get('/', 'home');
-$app->route->get('/contact', 'contact');
-
-$app->route->get('/about', 'about');
-
-$app->route->get('/404', '404');
-
+require "../src/Route/route.php";
 
 $app->run();
-
-

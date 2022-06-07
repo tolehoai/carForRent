@@ -13,9 +13,19 @@
   ],
   "require": {
     "ext-pdo": "*",
-    "vlucas/phpdotenv": "^5.4"
+    "vlucas/phpdotenv": "^5.4",
+    "firebase/php-jwt": "^6.2",
+    "paragonie/sodium_compat": "^1.17",
+    "aws/aws-sdk-php": "^3.224"
   },
   "require-dev": {
-    "squizlabs/php_codesniffer": "3.*"
+    "squizlabs/php_codesniffer": "3.*",
+    "phpunit/phpunit": "^9",
+    "vimeo/psalm": "^4.23"
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Test\\": "tests/"
+    }
   }
 }

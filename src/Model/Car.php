@@ -5,7 +5,7 @@ namespace Tolehoai\CarForRent\Model;
 class Car
 {
     private int $id;
-    private string $img;
+    private ?string $img = null;
     private int $luggage;
     private int $doors;
     private int $passenger;
@@ -93,7 +93,7 @@ class Car
     /**
      * @return string
      */
-    public function getImg(): string
+    public function getImg(): ?string
     {
         return $this->img;
     }
@@ -101,7 +101,7 @@ class Car
     /**
      * @param string $img
      */
-    public function setImg(string $img): void
+    public function setImg(?string $img): void
     {
         $this->img = $img;
     }

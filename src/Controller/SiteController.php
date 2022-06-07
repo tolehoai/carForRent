@@ -2,13 +2,16 @@
 
 namespace Tolehoai\CarForRent\Controller;
 
-use Tolehoai\CarForRent\Boostrap\Application;
+use Dotenv\Dotenv;
 use Tolehoai\CarForRent\Boostrap\Controller;
 
 class SiteController extends Controller
 {
+
     public function home()
     {
+
+
         $param = [
             'name' => 'To Le Hoai'
         ];

@@ -63,7 +63,6 @@ class Validator
 
     public function required()
     {
-//        var_dump(empty($this->file['name']));
         if (($this->value == '' || $this->value == null)) {
             $this->errors[$this->name] = 'Field value ' . $this->name . ' is required.';
         }
@@ -128,7 +127,6 @@ class Validator
         $this->errors[$this->name] = 'Field value ' . $this->name . ' must be integer';
         return $this;
     }
-
 
     public function ext($extension)
     {

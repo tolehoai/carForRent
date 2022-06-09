@@ -160,7 +160,6 @@ class CarTransfer
 
     public function fromArray(array $params)
     {
-
         $this->setName($params['name'] ?? null);
         $this->setBrand($params['brand'] ?? null);
         $this->setColor($params['color'] ?? null);

@@ -10,16 +10,16 @@ use Tolehoai\CarForRent\Service\CarService;
 
 class SiteController extends BaseController
 {
-    private CarRepository $carRepository;
+    private CarService $carService;
 
-    public function __construct(CarRepository $carRepository)
+    public function __construct(CarService $carService)
     {
-        $this->carRepository = $carRepository;
+        $this->carService = $carService;
     }
 
     public function home()
     {
-        $carList = $this->carRepository->findAll(50, 0);
+        $carList = $this->carService->getAllCar();
 
         return View::renderView(
             'home',

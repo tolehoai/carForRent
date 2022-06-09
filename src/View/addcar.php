@@ -145,7 +145,7 @@
                     <label for="cc-name" class="form-label">Passenger</label>
                     <input type="text" class="form-control" placeholder="" name="passenger">
                     <?php
-                    if(isset($formError['name'])){
+                    if(isset($formError['passenger'])){
                         echo ' <div style="color:red; font-style: italic">'.$formError['passenger'].'</div>';
                     }
                     ?>
@@ -165,7 +165,7 @@
             <div class="mt-3">
                 <input class="form-control" type="file" id="image" name="image">
                 <?php
-                if(isset($formError['price'])){
+                if(isset($formError['image'])){
                     echo ' <div style="color:red; font-style: italic">'.$formError['image'].'</div>';
                 }
                 ?>

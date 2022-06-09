@@ -38,8 +38,9 @@ class Validator
         return $this;
     }
 
-    public function file($file){
-        $this->file = $file;
+    public function file($file)
+    {
+        $this->setFile($file);
         return $this;
     }
 
@@ -58,11 +59,19 @@ class Validator
         }
         return $this;
     }
-    
+
 
     public function required()
     {
-        if ((isset($this->file)) || ($this->value == '' || $this->value == null)) {
+        if (($this->value == '' || $this->value == null)) {
+            $this->errors[$this->name] = 'Field value ' . $this->name . ' is required.';
+        }
+        return $this;
+    }
+
+    public function imageRequired()
+    {
+        if ($this->file['size'] == 0) {
             $this->errors[$this->name] = 'Field value ' . $this->name . ' is required.';
         }
         return $this;
@@ -96,8 +105,7 @@ class Validator
         return $this;
     }
 
-    
-    
+
     public function checkSize(int $size)
     {
         if (!empty($this->errors[$this->name])) {
@@ -107,18 +115,18 @@ class Validator
 
         if ($this->file['size'] > $maxsize) {
             $this->errors[$this->name] = "File size is larger than $size MB.";
-
         }
         return $this;
     }
 
-    public  function is_int(){
-        if(is_numeric($this->value)) return $this;
-         $this->errors[$this->name] = 'Field value ' . $this->name . ' must be integer';
-         return $this;
+    public function is_int()
+    {
+        if (is_numeric($this->value)) {
+            return $this;
+        }
+        $this->errors[$this->name] = 'Field value ' . $this->name . ' must be integer';
+        return $this;
     }
-
-
 
     public function ext($extension)
     {
@@ -154,6 +162,53 @@ class Validator
         return false;
     }
 
+    /**
+     * @return string
+     */
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param string $name
+     */
+    public function setName(string $name): void
+    {
+        $this->name = $name;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getValue()
+    {
+        return $this->value;
+    }
+
+    /**
+     * @param mixed $value
+     */
+    public function setValue($value): void
+    {
+        $this->value = $value;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFile()
+    {
+        return $this->file;
+    }
+
+    /**
+     * @param mixed $file
+     */
+    public function setFile($file): void
+    {
+        $this->file = $file;
+    }
 
 
 }

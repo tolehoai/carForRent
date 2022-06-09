@@ -19,37 +19,19 @@ class CarRepository
         $this->carTransformer = $carTransformer;
     }
 
-    public function findAll(int $limit, int $offset)
+    public function findAll(int $limit, int $offset): array
     {
         $query = "SELECT * FROM car LIMIT :offset,:limit";
         $statement = $this->connection->prepare($query);
         $statement->bindValue('offset', $offset, PDO::PARAM_INT);
         $statement->bindValue('limit', $limit, PDO::PARAM_INT);
         $statement->execute();
-
         $row = $statement->fetchAll();
 
         if (!$row) {
             return [];
         }
-        $carList = [];
-        foreach ($row as $result) {
-            $car = new Car();
-            $car->setId($result['id']);
-            $car->setBrand($result['brand']);
-            $car->setColor($result['color']);
-            $car->setName($result['name']);
-            $car->setImg($result['img']);
-            $car->setLuggage($result['luggage']);
-            $car->setDoors($result['doors']);
-            $car->setPrice($result['price']);
-            $car->setPassenger($result['passenger']);
-
-            $carTransformer = $this->carTransformer->transform($car);
-            array_push($carList, $carTransformer);
-        }
-
-        return $carList;
+        return $row;
     }
 
     public function save(CarTransfer $car): bool

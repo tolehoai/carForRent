@@ -42,7 +42,6 @@ class CarController
         }
         $this->carTransfer->fromArray($this->request->getBody());
         $isUploadCarValid = $this->carValidator->validateCarUpload($this->carTransfer, $_FILES['image']);
-
         if (!empty($isUploadCarValid)) {
             return View::renderView(
                 'addcar',
@@ -50,8 +49,8 @@ class CarController
             );
         }
 
-        $this->uploadService->uploadImage($_FILES['image']);
-
+        $imgUrl = $this->uploadService->uploadImage($_FILES['image']);
+        $this->carTransfer->setImg($imgUrl);
         $isAddCarSuccess = $this->carRepository->save($this->carTransfer);
         $message = [];
         if (!$isAddCarSuccess) {
